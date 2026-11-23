@@ -1,0 +1,141 @@
+
+.profile-selection {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(91, 33, 182, 0.18), transparent 45%),
+    #080b16;
+  color: #fff;
+  overflow-y: auto;
+}
+
+.profile-selection-content {
+  width: 100%;
+  max-width: 1100px;
+  text-align: center;
+}
+
+.profile-eyebrow {
+  color: #a78bfa;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  margin-bottom: 18px;
+}
+
+.profile-selection-content > h1 {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -2px;
+}
+
+.profile-subtitle {
+  color: #9ca3af;
+  font-size: 17px;
+  margin-top: 14px;
+  margin-bottom: 55px;
+}
+
+.profile-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+}
+
+.profile-card {
+  min-width: 0;
+  padding: 35px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.035);
+  color: #fff;
+  cursor: pointer;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+}
+
+.profile-card:hover {
+  border-color: var(--profile-color);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 15px 50px color-mix(in srgb, var(--profile-color) 20%, transparent);
+}
+
+.profile-avatar {
+  width: 115px;
+  height: 115px;
+  margin: 0 auto 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22px;
+  color: var(--profile-color);
+  background: color-mix(in srgb, var(--profile-color) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--profile-color) 45%, transparent);
+}
+
+.profile-card h2 {
+  font-size: 23px;
+  margin-bottom: 10px;
+}
+
+.profile-card p {
+  color: #cbd5e1;
+  font-size: 14px;
+  margin-bottom: 22px;
+}
+
+.profile-card-link {
+  color: var(--profile-color);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.profile-footer {
+  color: #64748b;
+  font-size: 11px;
+  letter-spacing: 4px;
+  margin-top: 65px;
+}
+
+@media (max-width: 700px) {
+  .profile-cards {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    margin: auto;
+    gap: 18px;
+  }
+
+  .profile-card {
+    padding: 24px 18px;
+  }
+
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+  }
+
+  .profile-avatar svg {
+    width: 35px;
+  }
+
+  .profile-subtitle {
+    margin-bottom: 30px;
+  }
+
+  .profile-footer {
+    margin-top: 35px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-card {
+    transition: none;
+  }
+}

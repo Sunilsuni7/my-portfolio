@@ -1,41 +1,38 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { GraduationCap } from 'lucide-react';
+import { GraduationCap, Calendar, Award } from 'lucide-react';
 
-export default function EducationCard({ edu, reducedMotion }) {
+export default function EducationCard({ edu }) {
   return (
-    <motion.div 
-      className="education-card premium-card"
-      variants={{
-        hidden: { opacity: 0, x: -30 },
-        visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
-      }}
-      whileHover={reducedMotion ? {} : { x: 5 }}
+    <div 
+      className="min-education-card"
+      tabIndex={0}
+      role="article"
     >
-      <div className="edu-icon-container">
-        <GraduationCap size={32} className="text-accent" />
-      </div>
-      
-      <div className="education-card-body">
-        <h3 className="education-org">{edu.institution}</h3>
-        
-        <div className="education-degree-wrap">
-          <span className="education-program">{edu.program}</span>
-          <span className="education-type-badge">{edu.degree}</span>
+      <div className="min-edu-header">
+        <div className="min-edu-icon-wrap" aria-hidden="true">
+          <GraduationCap size={20} />
         </div>
-        
-        {edu.period && (
-          <div className="education-date">
-            {edu.period}
-          </div>
-        )}
-        
-        {edu.description && (
-          <div className="education-section">
-            <p>{edu.description}</p>
-          </div>
+        <div className="min-edu-org-wrap">
+          <h3 className="min-edu-institution">{edu.degree}</h3>
+          <span className="min-edu-degree">{edu.institution}</span>
+        </div>
+        {edu.score && (
+          <span className="min-edu-score-pill">
+            <Award size={13} className="min-edu-award-icon" />
+            {edu.score}
+          </span>
         )}
       </div>
-    </motion.div>
+
+      <div className="min-edu-meta">
+        <span className="min-edu-date">
+          <Calendar size={13} /> {edu.period}
+        </span>
+      </div>
+
+      {edu.description && (
+        <p className="min-edu-description">{edu.description}</p>
+      )}
+    </div>
   );
 }

@@ -1,44 +1,86 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { FaGithub } from 'react-icons/fa';
+import { CheckCircle2, Code2, ExternalLink } from 'lucide-react';
 
-export default function ProjectCard({ project, onOpenModal, reducedMotion }) {
+export default function ProjectCard({ project }) {
   return (
-    <motion.article 
-      className="project-card premium-card"
-      variants={{
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-      }}
-      whileHover={reducedMotion ? {} : { y: -5 }}
+    <article 
+      className="min-project-card"
+      tabIndex={0}
+      role="article"
+      aria-labelledby={`project-title-${project.id}`}
     >
-      <div className="project-card-visual" onClick={() => onOpenModal(project)}>
-        {/* Placeholder visual if no image */}
-        <div className="project-visual-placeholder">
-          <span className="project-visual-abbr">{project.title.substring(0, 2).toUpperCase()}</span>
+      {/* CARD HEADER */}
+      <div className="min-project-header">
+        <div className="min-project-top-row">
+          <span className="min-project-category">{project.category}</span>
+          <div className="min-project-icon-badge" aria-hidden="true">
+            <Code2 size={15} />
+          </div>
         </div>
+        <h3 id={`project-title-${project.id}`} className="min-project-title">
+          {project.title}
+        </h3>
       </div>
-      
-      <div className="project-card-content">
-        <div className="project-card-header">
-          <span className="project-card-category">{project.category}</span>
-          <h3 className="project-card-title">{project.title}</h3>
-        </div>
-        
-        <p className="project-card-desc">{project.description}</p>
-        
-        <div className="tech-tags">
-          {project.technologies.slice(0, 4).map(tech => (
-            <span key={tech} className="tech-tag small">{tech}</span>
+
+      {/* OVERVIEW */}
+      <p className="min-project-overview">
+        {project.overview}
+      </p>
+
+      {/* KEY FEATURES */}
+      <div className="min-project-features-block">
+        <h4 className="min-project-subheading">Key Features</h4>
+        <ul className="min-project-features-list">
+          {project.features.map((feature, idx) => (
+            <li key={idx} className="min-project-feature-item">
+              <CheckCircle2 size={14} className="min-project-check-icon" />
+              <span>{feature}</span>
+            </li>
           ))}
-          {project.technologies.length > 4 && (
-            <span className="tech-tag small">+{project.technologies.length - 4}</span>
-          )}
-        </div>
-        
-        <button className="view-project-btn" onClick={() => onOpenModal(project)}>
-          View Project
-        </button>
+        </ul>
       </div>
-    </motion.article>
+
+      {/* TECHNOLOGIES */}
+      <div className="min-project-tech-block">
+        <h4 className="min-project-subheading">Technologies Used</h4>
+        <div className="min-project-tech-tags">
+          {project.technologies.map((tech) => (
+            <span key={tech} className="min-project-tech-tag">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* ACTIONS */}
+      <div className="min-project-actions">
+        {project.liveDemo && (
+          <a
+            href={project.liveDemo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="min-project-btn live"
+            aria-label={`View live demo of ${project.title}`}
+          >
+            <ExternalLink size={14} />
+            <span>Live Demo</span>
+          </a>
+        )}
+
+        {project.github && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="min-project-btn primary"
+            aria-label={`View ${project.title} on GitHub`}
+          >
+            <FaGithub size={14} />
+            <span>GitHub Repository</span>
+          </a>
+        )}
+      </div>
+    </article>
   );
 }

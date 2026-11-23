@@ -1,235 +1,136 @@
-import { useState, useEffect, Suspense, lazy } from "react";
-const Hero3DScene = lazy(() => import('./Hero3D'));
-import About from "./components/About";
+import { useState, useEffect } from "react";
+import Navbar from "./components/Navbar";
+import Hero from "./components/hero/Hero";
 import TechnologyStack from "./components/TechnologyStack";
 import Projects from "./components/projects/Projects";
 import Experience from "./components/experience/Experience";
 import Education from "./components/education/Education";
+import About from "./components/About";
 import Contact from "./components/contact/Contact";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronRight, ArrowDown } from "lucide-react";
+import ScrollReveal from "./components/common/ScrollReveal";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import profile from "./assets/profile.jpg";
+import { ArrowUp } from "lucide-react";
 import "./App.css";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.6, ease: "easeOut" } 
-  }
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15
-    }
-  }
-};
-
 function App() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      
-      const sections = ["home", "about", "skills", "projects", "experience", "education", "contact"];
-      const current = sections.find(section => {
-        const el = document.getElementById(section);
+      // 1. If near top, activate Home
+      if (window.scrollY < 120) {
+        setActiveSection("home");
+        return;
+      }
+
+      // 2. If near page bottom, activate Contact
+      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80;
+      if (isAtBottom) {
+        setActiveSection("contact");
+        return;
+      }
+
+      // 3. Priority check for certifications (nested inside education section)
+      const certEl = document.getElementById("certifications");
+      if (certEl) {
+        const certRect = certEl.getBoundingClientRect();
+        if (certRect.top <= 260 && certRect.bottom >= 120) {
+          setActiveSection("certifications");
+          return;
+        }
+      }
+
+      // 4. Check primary navigation targets in order of page placement
+      // Layout sequence: home -> skills -> projects -> experience -> education (with certifications) -> about -> contact
+      const sectionTargets = [
+        { id: "contact", navId: "contact" },
+        { id: "about", navId: "about" },
+        { id: "certifications", navId: "certifications" },
+        { id: "education", navId: "education" },
+        { id: "experience", navId: "experience" },
+        { id: "projects", navId: "projects" },
+        { id: "skills", navId: "skills" },
+      ];
+
+      for (const target of sectionTargets) {
+        const el = document.getElementById(target.id);
         if (el) {
           const rect = el.getBoundingClientRect();
-          return rect.top >= -200 && rect.top <= 300;
+          if (rect.top <= 260 && rect.bottom >= 100) {
+            setActiveSection(target.navId);
+            return;
+          }
         }
-        return false;
-      });
-      
-      if (current) setActiveSection(current);
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const closeMenu = () => setIsMobileMenuOpen(false);
-
   return (
-    <div className="portfolio">
-      {/* NAVBAR */}
-      <header className={`navbar ${isScrolled ? "scrolled" : ""}`}>
-        <div className="nav-container">
+    <div className="portfolio-root">
+      {/* FLOATING MODERN NAVIGATION BAR */}
+      <Navbar activeSection={activeSection} />
 
-          <nav className="nav-links desktop-nav">
-            {["Home", "About", "Skills", "Projects", "Experience", "Education", "Contact"].map((item) => (
-              <a 
-                key={item} 
-                href={`#${item.toLowerCase()}`}
-                className={activeSection === item.toLowerCase() ? "active" : ""}
-              >
-                {item}
-              </a>
-            ))}
-          </nav>
+      <div className="portfolio">
+        <main>
+        {/* HERO SECTION WITH REAL PROFILE PHOTOGRAPH */}
+        <Hero />
 
-          <a href="#contact" className="nav-button desktop-nav">
-            Let's Talk
-          </a>
-
-          <button 
-            className="mobile-menu-btn"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </header>
-
-      {/* MOBILE MENU */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div 
-            className="mobile-menu"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            {["Home", "About", "Skills", "Projects", "Experience", "Education", "Contact"].map((item) => (
-              <a 
-                key={item} 
-                href={`#${item.toLowerCase()}`}
-                onClick={closeMenu}
-              >
-                {item}
-              </a>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <main>
-        {/* HERO */}
-        <section id="home" className="hero">
-          <div className="hero-container">
-            <motion.div 
-              className="hero-content"
-              initial="hidden"
-              animate="visible"
-              variants={staggerContainer}
-            >
-              <motion.div variants={fadeUp} className="available badge">
-                <span className="dot"></span>
-                HELLO, I'M
-              </motion.div>
-
-              <motion.h1 variants={fadeUp}>
-                Sunil S.
-              </motion.h1>
-
-              <motion.p variants={fadeUp} className="hero-role text-accent gradient-text" style={{ fontSize: '24px', fontWeight: '600', marginBottom: '16px' }}>
-                Python & Full-Stack Developer
-              </motion.p>
-
-              <motion.p variants={fadeUp} className="hero-description">
-                An Information Science Engineering student focusing on software development, Python, machine learning, and building digital experiences that matter.
-              </motion.p>
-
-              <motion.div variants={fadeUp} className="hero-buttons">
-                <a href="#projects" className="primary-button">
-                  Explore Projects <ChevronRight size={18} />
-                </a>
-                <a
-                  href="/resume.pdf"
-                  className="outline-button"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Download Resume
-                </a>
-              </motion.div>
-
-              <motion.div variants={fadeUp} className="hero-socials">
-                <a href="https://github.com/Sunilsuni7" target="_blank" rel="noreferrer" aria-label="GitHub">
-                  <FaGithub size={22} />
-                </a>
-                <a href="https://www.linkedin.com/in/sunil-s-460a5937b" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-                  <FaLinkedin size={22} />
-                </a>
-              </motion.div>
-            </motion.div>
-
-            <motion.div 
-              className="hero-visual hero-3d-wrapper"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.2 }}
-            >
-              <Suspense fallback={
-                <div className="profile-presentation">
-                  <div className="profile-glow"></div>
-                  <img src={profile} alt="Sunil S. - Software Developer" className="profile-image" width="300" height="300" />
-                </div>
-              }>
-                <Hero3DScene />
-              </Suspense>
-            </motion.div>
-          </div>
-          
-          <motion.div 
-            className="scroll-indicator"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
-          >
-            <span>SCROLL TO EXPLORE</span>
-            <div className="arrow-down-bounce">
-              <ArrowDown size={20} />
-            </div>
-          </motion.div>
-        </section>
-
-        {/* ABOUT */}
-        <About />
-
-        {/* SKILLS */}
+        {/* SKILLS / TECHNOLOGY STACK SECTION */}
         <TechnologyStack />
 
-        {/* PROJECTS */}
+        {/* PROJECTS SECTION */}
         <Projects />
 
-        {/* EXPERIENCE */}
+        {/* EXPERIENCE SECTION */}
         <Experience />
 
-        {/* EDUCATION */}
+        {/* EDUCATION & CERTIFICATIONS SECTION */}
         <Education />
 
-        {/* CONTACT */}
+        {/* ABOUT SECTION (TWO-COLUMN PROFESSIONAL LAYOUT AT DOWN SIDE) */}
+        <About />
+
+        {/* CONTACT SECTION */}
         <Contact />
       </main>
 
-      {/* FOOTER */}
-      <footer className="footer">
-        <div className="container footer-content">
-          <div className="footer-brand">
-            <strong>Sunil<span>S.</span></strong>
-            <p>Software Developer</p>
+      {/* MINIMAL PROFESSIONAL FOOTER WITH SMOOTH ENTRANCE */}
+      <footer className="pro-footer">
+        <ScrollReveal delay={0} threshold={0.01} rootMargin="0px" className="container pro-footer-content">
+          <div className="pro-footer-left">
+            <span className="pro-footer-copy">© 2026 Sunil S All Rights Reserved.</span>
           </div>
-          
-          <div className="footer-copyright">
-            © 2026 Sunil S. All rights reserved.
+
+          <div className="pro-footer-socials">
+            <a 
+              href="https://github.com/Sunilsuni7" 
+              target="_blank" 
+              rel="noreferrer" 
+              aria-label="GitHub Profile"
+              className="pro-footer-icon"
+            >
+              <FaGithub size={18} />
+            </a>
+            <a 
+              href="https://linkedin.com/in/sunils7" 
+              target="_blank" 
+              rel="noreferrer" 
+              aria-label="LinkedIn Profile"
+              className="pro-footer-icon"
+            >
+              <FaLinkedin size={18} />
+            </a>
+            <a href="#home" className="pro-back-to-top" aria-label="Back to top">
+              <ArrowUp size={16} />
+            </a>
           </div>
-          
-          <a href="#home" className="back-to-top">
-            Back to top ↑
-          </a>
-        </div>
+        </ScrollReveal>
       </footer>
+      </div>
     </div>
   );
 }

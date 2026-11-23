@@ -1,98 +1,60 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { GraduationCap, Layout, Terminal, Cpu, ArrowDown } from 'lucide-react';
-import DeveloperInfoCard from './DeveloperInfoCard';
-import DeveloperCodeBlock from './DeveloperCodeBlock';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-};
+import React from 'react';
+import { GraduationCap, MapPin, Sparkles } from 'lucide-react';
+import ScrollReveal from './common/ScrollReveal';
 
 export default function About() {
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReducedMotion(mediaQuery.matches);
-    const handler = (e) => setReducedMotion(e.matches);
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, []);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
-  };
-
   return (
-    <section id="about" className="section">
+    <section id="about" className="section min-about-section">
       <div className="container">
-        <motion.div 
-          className="about-wrapper"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
-        >
-          <div className="about-header">
-            <motion.div variants={fadeUp} className="section-label">
-              <span className="text-accent">01 //</span> ABOUT
-            </motion.div>
-            <motion.h2 variants={fadeUp}>
-              Building with <span className="gradient-text">code, data & AI.</span>
-            </motion.h2>
-            <motion.p variants={fadeUp} className="about-intro">
-              I'm an Information Science Engineering student focused on building practical web applications, AI-powered tools, and full-stack software using Python, React, APIs, databases, and modern development technologies.
-            </motion.p>
-          </div>
-
-          <div className="about-grid-layout">
-            <div className="cards-grid">
-              <DeveloperInfoCard 
-                title="EDUCATION" 
-                icon={GraduationCap} 
-                items={["Information Science Engineering", "Garden City University"]}
-                reducedMotion={reducedMotion}
-              />
-              <DeveloperInfoCard 
-                title="DEVELOPMENT FOCUS" 
-                icon={Layout} 
-                items={["Python", "Full-Stack Development", "AI Applications"]}
-                reducedMotion={reducedMotion}
-              />
-              <DeveloperInfoCard 
-                title="CURRENT STACK" 
-                icon={Terminal} 
-                items={["Python", "React", "JavaScript", "FastAPI", "SQL"]}
-                reducedMotion={reducedMotion}
-              />
-              <DeveloperInfoCard 
-                title="CURRENTLY BUILDING" 
-                icon={Cpu} 
-                items={["Intelligent AI Productivity Assistant", "HealthCarePro – Smart Healthcare Management System"]}
-                reducedMotion={reducedMotion}
-              />
+        <div className="min-about-wrapper">
+          {/* SECTION HEADER */}
+          <ScrollReveal delay={0} className="section-header">
+            <div className="min-section-label">
+              ABOUT
             </div>
-            
-            <div className="code-visual-wrapper">
-              <DeveloperCodeBlock reducedMotion={reducedMotion} />
-            </div>
-          </div>
-        </motion.div>
+            <h2 className="section-title">
+              About Me
+            </h2>
+          </ScrollReveal>
 
-        <motion.div 
-          className="section-transition"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-        >
-          <span>TECHNOLOGY STACK</span>
-          <div className="arrow-down-bounce">
-            <ArrowDown size={20} />
+          {/* MINIMALIST ABOUT CONTENT */}
+          <div className="min-about-grid">
+            <ScrollReveal delay={80} className="min-about-left">
+              <div className="min-card min-about-card">
+                <h3 className="min-card-heading">Professional Summary</h3>
+                <p className="min-summary-text">
+                  An Information Science Engineering student with foundational knowledge of Python, SQL and web technologies. Familiar with MySQL and React.js. Hands-on experience developing projects involving application development, database integration and problem-solving skills.
+                </p>
+
+                <div className="min-highlights-list">
+                  <ScrollReveal delay={140} className="min-highlight-item">
+                    <GraduationCap size={18} className="min-check-icon" />
+                    <div>
+                      <strong>Information Science Engineering Student</strong>
+                      <p>Currently pursuing Bachelor of Engineering at Garden City University (2023 — 2027).</p>
+                    </div>
+                  </ScrollReveal>
+
+                  <ScrollReveal delay={200} className="min-highlight-item">
+                    <MapPin size={18} className="min-check-icon" />
+                    <div>
+                      <strong>Bengaluru, India</strong>
+                      <p>Based in Bengaluru, actively seeking internships and software engineering opportunities.</p>
+                    </div>
+                  </ScrollReveal>
+
+                  <ScrollReveal delay={260} className="min-highlight-item">
+                    <Sparkles size={18} className="min-check-icon" />
+                    <div>
+                      <strong>Interest in software development and practical applications</strong>
+                      <p>Dedicated to writing clean, maintainable code, developing database-backed applications, and solving real-world challenges.</p>
+                    </div>
+                  </ScrollReveal>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

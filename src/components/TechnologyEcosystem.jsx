@@ -111,7 +111,7 @@ const DesktopSVG = ({ reducedMotion }) => {
   );
 };
 
-const MobileSVG = ({ reducedMotion }) => {
+const MobileSVG = () => {
   const nodeVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 }
@@ -185,16 +185,18 @@ const MobileSVG = ({ reducedMotion }) => {
 };
 
 export default function TechnologyEcosystem() {
-  const [isMobile, setIsMobile] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => 
+    typeof window !== 'undefined' ? window.innerWidth <= 768 : false
+  );
+  const [reducedMotion, setReducedMotion] = useState(() => 
+    typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false
+  );
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    handleResize();
     window.addEventListener('resize', handleResize);
 
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReducedMotion(mediaQuery.matches);
     const handler = (e) => setReducedMotion(e.matches);
     mediaQuery.addEventListener('change', handler);
 

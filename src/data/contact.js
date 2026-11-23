@@ -1,6 +1,8 @@
 export const contact = {
+  name: "Sunil S",
   email: "sunilsriramappa@gmail.com",
-  linkedin: "https://www.linkedin.com/in/sunil-s-460a5937b",
+  linkedin: "https://linkedin.com/in/sunils7",
   github: "https://github.com/Sunilsuni7",
-  availability: "I'm open to discussing software development, internship opportunities, projects, and technical collaborations."
+  location: "Bengaluru, India",
+  availability: "Open to software engineering internships, entry-level developer roles, and technical collaborations.",
 };

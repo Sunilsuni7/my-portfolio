@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 export default function ProjectFilters({ categories, activeCategory, onCategoryChange }) {
   return (

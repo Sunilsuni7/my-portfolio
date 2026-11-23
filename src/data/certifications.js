@@ -1,38 +1,43 @@
+import infosysCertImg from '../assets/infosys-python-foundation.png';
+import ibmCertImg from '../assets/ibm-deep-learning.png';
+import deloitteCertImg from '../assets/deloitte-data-analytics.png';
+
 export const certifications = [
   {
-    id: "python-foundation",
-    title: "Python Foundation",
-    organization: "Infosys",
+    id: "python-foundation-certification",
+    title: "Python Foundation Certification",
+    organization: "Infosys Springboard",
     date: "May 2026",
-    category: "Programming",
-    skills: ["Python"],
-    certificateUrl: null
-  },
-  {
-    id: "java-programming-fundamentals",
-    title: "Java Programming Fundamentals",
-    organization: "Infosys",
-    date: "Aug 2025",
-    category: "Programming",
-    skills: ["Java"],
-    certificateUrl: null
-  },
-  {
-    id: "deloitte-data-analytics",
-    title: "Deloitte Data Analytics Job Simulation",
-    organization: "Deloitte",
-    date: "Jul 2026",
-    category: "Analytics",
-    skills: ["Data Analytics", "Problem Solving"],
-    certificateUrl: null
+    completionDate: "May 2, 2026",
+    issuedDate: "May 5, 2026",
+    recipient: "Sunil S",
+    skills: ["Python", "Problem Solving", "Object-Oriented Programming"],
+    image: infosysCertImg,
+    imagePublicPath: "infosys-python-foundation.png",
+    hasImage: true,
   },
   {
     id: "ibm-deep-learning",
-    title: "Deep Learning with PyTorch, Keras & TensorFlow",
-    organization: "IBM",
-    date: "Apr 2026",
-    category: "Data & AI",
-    skills: ["PyTorch", "Keras", "TensorFlow", "Deep Learning"],
-    certificateUrl: null
-  }
+    title: "IBM Deep Learning with PyTorch, Keras and TensorFlow",
+    organization: "IBM / Coursera",
+    date: "February 25, 2026",
+    completionDate: "February 25, 2026",
+    recipient: "Sunil S",
+    skills: ["Deep Learning", "PyTorch", "Keras", "TensorFlow"],
+    image: ibmCertImg,
+    imagePublicPath: "ibm-deep-learning.png",
+    hasImage: true,
+  },
+  {
+    id: "data-analytics-job-simulations",
+    title: "Data Analytics Job Simulations",
+    organization: "Deloitte",
+    date: "July 2026",
+    completionDate: "July 2, 2026",
+    recipient: "Sunil S",
+    skills: ["Data Analysis", "Forensic Technology", "Business Analysis"],
+    image: deloitteCertImg,
+    imagePublicPath: "deloitte-data-analytics.png",
+    hasImage: true,
+  },
 ];

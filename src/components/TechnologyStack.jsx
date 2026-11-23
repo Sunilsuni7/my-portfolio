@@ -1,60 +1,42 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { categories, technologies } from '../data/technologies';
-import TechnologyCategory from './TechnologyCategory';
-import TechnologyCard from './TechnologyCard';
-import TechnologyEcosystem from './TechnologyEcosystem';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-};
+import { useState, useMemo } from "react";
+import { skillCategories, categories } from "../data/technologies";
+import TechnologyCategory from "./TechnologyCategory";
+import TechnologyCard from "./TechnologyCard";
+import ScrollReveal from "./common/ScrollReveal";
 
 export default function TechnologyStack() {
-  const [activeCategory, setActiveCategory] = useState(categories[0].id);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("all");
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReducedMotion(mediaQuery.matches);
-    const handler = (e) => setReducedMotion(e.matches);
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, []);
-
-  const filteredTechs = useMemo(() => {
-    return technologies.filter(t => t.category === activeCategory);
+  const visibleCategories = useMemo(() => {
+    if (activeCategory === "all") {
+      return skillCategories;
+    }
+    return skillCategories.filter((cat) => cat.id === activeCategory);
   }, [activeCategory]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-  };
-
   return (
-    <section id="skills" className="section darker-bg">
+    <section id="skills" className="section min-skills-section">
       <div className="container">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
-        >
-          <div className="section-header centered">
-            <motion.div variants={fadeUp} className="section-label">
-              <span className="text-accent">02 //</span> TECHNOLOGY STACK
-            </motion.div>
-            <motion.h2 variants={fadeUp}>
-              Tools I <span className="gradient-text">build with.</span>
-            </motion.h2>
-            <motion.p variants={fadeUp} className="subtitle">
-              A practical ecosystem of technologies used across my projects.
-            </motion.p>
-          </div>
+        <div className="min-skills-wrapper">
+          {/* SECTION HEADER */}
+          <ScrollReveal delay={0} className="section-header">
+            <div className="min-section-label">
+              TECHNICAL SKILLS
+            </div>
 
-          <motion.div variants={fadeUp} className="tech-categories-wrapper">
-            <div className="tech-categories">
-              {categories.map(cat => (
+            <h2 className="section-title">
+              Technical Skills
+            </h2>
+
+            <p className="min-section-subtitle">
+              A structured overview of core programming languages, web technologies, database systems, libraries, and developer tools.
+            </p>
+          </ScrollReveal>
+
+          {/* CATEGORY FILTER TABS */}
+          <ScrollReveal delay={80} className="min-category-tabs-wrapper">
+            <div className="min-category-tabs" role="tablist" aria-label="Skill categories">
+              {categories.map((cat) => (
                 <TechnologyCategory
                   key={cat.id}
                   label={cat.label}
@@ -63,31 +45,51 @@ export default function TechnologyStack() {
                 />
               ))}
             </div>
-          </motion.div>
+          </ScrollReveal>
 
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={activeCategory}
-              className="tech-cards-grid"
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={containerVariants}
-            >
-              {filteredTechs.map(tech => (
-                <TechnologyCard 
-                  key={tech.id} 
-                  tech={tech} 
-                  reducedMotion={reducedMotion} 
-                />
-              ))}
-            </motion.div>
-          </AnimatePresence>
+          {/* SKILL CATEGORIES GRID */}
+          <div
+            className={`min-skills-categories-grid ${activeCategory === "all" ? "grid-all" : "grid-single"}`}
+          >
+            {visibleCategories.map((category, idx) => {
+              const CatIcon = category.icon;
+              return (
+                <ScrollReveal
+                  key={category.id}
+                  delay={idx * 75}
+                  className="min-category-card"
+                >
+                  {/* CATEGORY CARD HEADER */}
+                  <div className="min-category-card-header">
+                    <div className="min-category-header-title">
+                      <h3 className="min-category-title">{category.title}</h3>
+                    </div>
+                    {CatIcon && (
+                      <div className="min-category-icon-badge" aria-hidden="true">
+                        <CatIcon size={16} />
+                      </div>
+                    )}
+                  </div>
 
-          <div className="ecosystem-section">
-            <TechnologyEcosystem />
+                  {/* SKILLS CARDS LIST */}
+                  <div className="min-skills-cards-list" role="list">
+                    {category.skills.map((skill, sIdx) => (
+                      <ScrollReveal
+                        key={skill.id || skill.name}
+                        delay={idx * 40 + sIdx * 35}
+                        yOffset={14}
+                        duration={450}
+                        as="div"
+                      >
+                        <TechnologyCard skill={skill} />
+                      </ScrollReveal>
+                    ))}
+                  </div>
+                </ScrollReveal>
+              );
+            })}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

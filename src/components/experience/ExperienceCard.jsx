@@ -1,69 +1,61 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Briefcase, Calendar, ChevronRight, ExternalLink } from 'lucide-react';
+import { Briefcase, CheckCircle2, Calendar } from 'lucide-react';
 
-export default function ExperienceCard({ exp, reducedMotion }) {
+export default function ExperienceCard({ exp }) {
   return (
-    <motion.div 
-      className="experience-card premium-card"
-      variants={{
-        hidden: { opacity: 0, x: -30 },
-        visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
-      }}
-      whileHover={reducedMotion ? {} : { x: 5 }}
-    >
-      <div className="experience-card-header">
-        <h3 className="experience-org">{exp.organization}</h3>
-        <div className="experience-role-wrap">
-          <span className="experience-role">{exp.role}</span>
-          <span className="experience-type-badge">{exp.type}</span>
+    <div className="min-experience-card">
+      <div className="min-exp-header">
+        <div className="min-exp-role-group">
+          <div className="min-exp-org-badge">
+            <Briefcase size={14} className="min-exp-briefcase-icon" />
+            <span className="min-exp-org">{exp.organization}</span>
+          </div>
+          <h3 className="min-exp-role">{exp.role}</h3>
         </div>
-        <div className="experience-date">
-          <Calendar size={14} /> {exp.startDate} – {exp.endDate}
+        <div className="min-exp-meta-pills">
+          {exp.duration && (
+            <span className="min-exp-duration-pill">
+              <Calendar size={13} className="min-exp-cal-icon" />
+              {exp.duration}
+            </span>
+          )}
+          {exp.type && (
+            <span className="min-exp-type-pill">{exp.type}</span>
+          )}
         </div>
       </div>
-      
-      <div className="experience-card-body">
-        <div className="experience-project-box">
-          <strong>Project:</strong> {exp.project}
+
+      {exp.project && (
+        <div className="min-exp-project-row">
+          <span className="min-exp-label">Project:</span>
+          <span className="min-exp-project-name">{exp.project}</span>
         </div>
-        
-        <div className="experience-section">
-          <h4>Overview</h4>
-          <p>{exp.description}</p>
-        </div>
-        
-        <div className="experience-section">
-          <h4>Responsibilities</h4>
-          <ul>
-            {exp.responsibilities.map((req, idx) => (
-              <li key={idx}>{req}</li>
-            ))}
-          </ul>
-        </div>
-        
-        <div className="experience-section">
-          <h4>Technologies</h4>
-          <div className="tech-tags">
-            {exp.technologies.map(tech => (
-              <span key={tech} className="tech-tag small">{tech}</span>
+      )}
+
+      <div className="min-exp-responsibilities">
+        <h4 className="min-exp-section-title">Key Responsibilities</h4>
+        <ul className="min-exp-bullets">
+          {exp.responsibilities.map((resp, idx) => (
+            <li key={idx} className="min-exp-bullet-item">
+              <CheckCircle2 size={16} className="min-exp-check-icon" />
+              <span>{resp}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {exp.technologies && exp.technologies.length > 0 && (
+        <div className="min-exp-techs">
+          <h4 className="min-exp-section-title">Core Competencies</h4>
+          <div className="min-exp-tech-tags">
+            {exp.technologies.map((tech) => (
+              <span key={tech} className="min-exp-tech-tag">
+                {tech}
+              </span>
             ))}
           </div>
         </div>
-        
-        <div className="experience-actions">
-          {exp.projectId && (
-            <a href={`#projects`} className="view-project-link">
-              View Project <ChevronRight size={16} />
-            </a>
-          )}
-          {exp.certificateUrl && (
-            <a href={exp.certificateUrl} target="_blank" rel="noreferrer" className="outline-button small">
-              <ExternalLink size={14} /> View Certificate
-            </a>
-          )}
-        </div>
-      </div>
-    </motion.div>
+      )}
+    </div>
   );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
-export default function FeaturedProject({ project, reducedMotion }) {
+export default function FeaturedProject({ project }) {
   if (!project) return null;
   
   return (

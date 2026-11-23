@@ -1,45 +1,37 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Award, ExternalLink } from 'lucide-react';
+import { Award, Calendar } from 'lucide-react';
 
-export default function CertificationCard({ cert, reducedMotion }) {
+export default function CertificationCard({ cert }) {
   return (
-    <motion.div 
-      className="certification-card premium-card"
-      variants={{
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-      }}
-      whileHover={reducedMotion ? {} : { y: -5 }}
+    <div 
+      className="min-cert-card"
+      tabIndex={0}
+      role="article"
     >
-      <div className="cert-header">
-        <Award size={24} className="text-accent cert-icon" />
-        <span className="cert-category">{cert.category}</span>
-      </div>
-      
-      <div className="cert-body">
-        <h4 className="cert-title">{cert.title}</h4>
-        <div className="cert-meta">
-          <span className="cert-org">{cert.organization}</span>
-          {cert.date && <span className="cert-date">• {cert.date}</span>}
+      <div className="min-cert-header">
+        <div className="min-cert-icon-wrap" aria-hidden="true">
+          <Award size={18} />
         </div>
-        
-        {cert.skills && cert.skills.length > 0 && (
-          <div className="tech-tags cert-tags">
-            {cert.skills.map(skill => (
-              <span key={skill} className="tech-tag small">{skill}</span>
-            ))}
-          </div>
-        )}
+        <span className="min-cert-org-badge">{cert.organization}</span>
       </div>
 
-      {cert.certificateUrl && (
-        <div className="cert-actions">
-          <a href={cert.certificateUrl} target="_blank" rel="noreferrer" className="view-cert-link">
-            View Certificate <ExternalLink size={14} />
-          </a>
+      <h4 className="min-cert-title">{cert.title}</h4>
+
+      <div className="min-cert-meta">
+        <span className="min-cert-date">
+          <Calendar size={13} /> {cert.date}
+        </span>
+      </div>
+
+      {cert.skills && cert.skills.length > 0 && (
+        <div className="min-cert-skills">
+          {cert.skills.map((skill) => (
+            <span key={skill} className="min-cert-skill-tag">
+              {skill}
+            </span>
+          ))}
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }
