@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
-import Hero from "./components/hero/Hero";
+import About from "./components/About";
+import Contact from "./components/contact/Contact";
 import TechnologyStack from "./components/TechnologyStack";
 import Projects from "./components/projects/Projects";
 import Experience from "./components/experience/Experience";
 import Education from "./components/education/Education";
-import About from "./components/About";
-import Contact from "./components/contact/Contact";
 import ScrollReveal from "./components/common/ScrollReveal";
 import WaveBackground from "./components/common/WaveBackground";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
@@ -14,20 +13,20 @@ import { ArrowUp } from "lucide-react";
 import "./App.css";
 
 function App() {
-  const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState("about");
 
   useEffect(() => {
     const handleScroll = () => {
-      // 1. If near top, activate Home
+      // 1. If near top, activate About
       if (window.scrollY < 120) {
-        setActiveSection("home");
+        setActiveSection("about");
         return;
       }
 
-      // 2. If near page bottom, activate Contact
+      // 2. If near page bottom, activate Certifications (last section)
       const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80;
       if (isAtBottom) {
-        setActiveSection("contact");
+        setActiveSection("certifications");
         return;
       }
 
@@ -41,16 +40,16 @@ function App() {
         }
       }
 
-      // 4. Check primary navigation targets in order of page placement
-      // Layout sequence: home -> skills -> projects -> experience -> education (with certifications) -> about -> contact
+      // 4. Check primary navigation targets in order of page placement (bottom to top for accurate detection)
+      // Exact top-to-bottom sequence: about -> contact -> skills -> projects -> experience -> education -> certifications
       const sectionTargets = [
-        { id: "contact", navId: "contact" },
-        { id: "about", navId: "about" },
         { id: "certifications", navId: "certifications" },
         { id: "education", navId: "education" },
         { id: "experience", navId: "experience" },
         { id: "projects", navId: "projects" },
         { id: "skills", navId: "skills" },
+        { id: "contact", navId: "contact" },
+        { id: "about", navId: "about" },
       ];
 
       for (const target of sectionTargets) {
@@ -80,68 +79,65 @@ function App() {
 
       <div className="portfolio">
         <main>
-        {/* HERO SECTION WITH REAL PROFILE PHOTOGRAPH */}
-        <Hero />
+          {/* 1. ABOUT SECTION (FIRST SECTION IMMEDIATELY BELOW NAVBAR) */}
+          <About />
 
-        {/* SKILLS / TECHNOLOGY STACK SECTION */}
-        <TechnologyStack />
+          {/* 2. CONTACT SECTION */}
+          <Contact />
 
-        {/* PROJECTS SECTION */}
-        <Projects />
+          {/* 3. SKILLS / TECHNOLOGY STACK SECTION */}
+          <TechnologyStack />
 
-        {/* EXPERIENCE SECTION */}
-        <Experience />
+          {/* 4. PROJECTS SECTION */}
+          <Projects />
 
-        {/* EDUCATION & CERTIFICATIONS SECTION */}
-        <Education />
+          {/* 5. EXPERIENCE SECTION */}
+          <Experience />
 
-        {/* ABOUT SECTION (TWO-COLUMN PROFESSIONAL LAYOUT AT DOWN SIDE) */}
-        <About />
+          {/* 6. EDUCATION & CERTIFICATIONS SECTION */}
+          <Education />
+        </main>
 
-        {/* CONTACT SECTION */}
-        <Contact />
-      </main>
+        {/* MINIMAL PROFESSIONAL FOOTER WITH SMOOTH ENTRANCE */}
+        <footer className="pro-footer">
+          <ScrollReveal delay={0} threshold={0.01} rootMargin="0px" className="container pro-footer-content">
+            <div className="pro-footer-left">
+              <span className="pro-footer-copy">© 2026 Sunil S All Rights Reserved.</span>
+            </div>
 
-      {/* MINIMAL PROFESSIONAL FOOTER WITH SMOOTH ENTRANCE */}
-      <footer className="pro-footer">
-        <ScrollReveal delay={0} threshold={0.01} rootMargin="0px" className="container pro-footer-content">
-          <div className="pro-footer-left">
-            <span className="pro-footer-copy">© 2026 Sunil S All Rights Reserved.</span>
-          </div>
-
-          <div className="pro-footer-socials">
-            <a 
-              href="https://github.com/Sunilsuni7" 
-              target="_blank" 
-              rel="noreferrer" 
-              aria-label="GitHub Profile"
-              className="pro-footer-icon"
-            >
-              <FaGithub size={18} />
-            </a>
-            <a 
-              href="https://linkedin.com/in/sunils7" 
-              target="_blank" 
-              rel="noreferrer" 
-              aria-label="LinkedIn Profile"
-              className="pro-footer-icon"
-            >
-              <FaLinkedin size={18} />
-            </a>
-            <a 
-              href="#home" 
-              className="pro-back-to-top" 
-              aria-label="Back to top"
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-            >
-              <ArrowUp size={16} />
-            </a>
-          </div>
-        </ScrollReveal>
-      </footer>
+            <div className="pro-footer-socials">
+              <a 
+                href="https://github.com/Sunilsuni7" 
+                target="_blank" 
+                rel="noreferrer" 
+                aria-label="GitHub Profile"
+                className="pro-footer-icon"
+              >
+                <FaGithub size={18} />
+              </a>
+              <a 
+                href="https://linkedin.com/in/sunils7" 
+                target="_blank" 
+                rel="noreferrer" 
+                aria-label="LinkedIn Profile"
+                className="pro-footer-icon"
+              >
+                <FaLinkedin size={18} />
+              </a>
+              <a 
+                href="#about" 
+                className="pro-back-to-top" 
+                aria-label="Back to top"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+              >
+                <ArrowUp size={16} />
+              </a>
+            </div>
+          </ScrollReveal>
+        </footer>
       </div>
     </div>
   );

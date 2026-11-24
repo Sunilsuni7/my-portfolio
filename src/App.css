@@ -630,6 +630,10 @@ img {
   scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
+#about.min-about-composite-section {
+  scroll-margin-top: 0;
+}
+
 /* HEADER WRAPPER */
 .pro-header-wrapper,
 .ref-navbar-wrapper {
