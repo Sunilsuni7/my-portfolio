@@ -62,9 +62,6 @@ export default function Navbar({ activeSection = 'home' }) {
         {/* MOBILE MENU DRAWER */}
         {isMobileMenuOpen && (
           <div className="ref-mobile-drawer">
-            <a href="#home" className="ref-mobile-link" onClick={closeMenu}>
-              Home
-            </a>
             {navLinks.map((item) => (
               <a
                 key={item.id}
