@@ -25,7 +25,7 @@ export const skillCategories = [
   {
     id: "programming",
     number: "01",
-    title: "Programming",
+    title: "Programming Languages",
     icon: Code2,
     skills: [
       { id: "python", name: "Python", icon: FaPython },
@@ -47,7 +47,7 @@ export const skillCategories = [
   {
     id: "database",
     number: "03",
-    title: "Database",
+    title: "Databases",
     icon: Server,
     skills: [
       { id: "mysql", name: "MySQL", icon: SiMysql },
@@ -57,7 +57,7 @@ export const skillCategories = [
   {
     id: "libraries",
     number: "04",
-    title: "Libraries",
+    title: "Libraries & Frameworks",
     icon: Library,
     skills: [
       { id: "numpy", name: "NumPy", icon: SiNumpy },
@@ -69,7 +69,7 @@ export const skillCategories = [
   {
     id: "tools",
     number: "05",
-    title: "Tools",
+    title: "Developer Tools",
     icon: Wrench,
     skills: [
       { id: "git", name: "Git", icon: FaGitAlt },

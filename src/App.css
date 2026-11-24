@@ -1628,42 +1628,43 @@ img {
 }
 
 .min-skills-cards-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+  align-items: center;
 }
 
+.min-skill-badge,
 .min-skill-card {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
+  gap: 8px;
+  padding: 8px 14px;
   background: var(--bg-inner);
   border: 1px solid var(--border-subtle);
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: default;
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.2s ease,
-              background-color 0.2s ease,
+              border-color 0.22s ease,
+              background-color 0.22s ease,
               box-shadow 0.22s ease;
   outline: none;
+  user-select: none;
 }
 
+.min-skill-badge:hover,
+.min-skill-badge:focus-visible,
 .min-skill-card:hover,
 .min-skill-card:focus-visible {
-  background: var(--bg-inner-hover);
+  background: #181a1f;
   border-color: var(--accent);
   transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 10px rgba(214, 183, 122, 0.12);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 10px rgba(214, 183, 122, 0.16);
 }
 
-.min-skill-card:hover .min-skill-icon-wrap {
-  transform: scale(1.1);
-  color: var(--accent-hover);
-}
-
+.min-skill-badge-icon,
 .min-skill-icon-wrap {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   color: var(--accent);
@@ -1671,12 +1672,21 @@ img {
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
+.min-skill-badge:hover .min-skill-badge-icon,
+.min-skill-card:hover .min-skill-icon-wrap {
+  transform: scale(1.12);
+  color: var(--accent-hover);
+}
+
+.min-skill-badge-name,
 .min-skill-name {
-  font-family: var(--font-serif);
-  font-size: 0.94rem;
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
   font-weight: 600;
-  color: var(--text-body);
-  line-height: 1.25;
+  color: #FFFFFF !important;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 /* --------------------------------------------------------------------------
@@ -3372,7 +3382,12 @@ img {
     height: 380px;
   }
   .min-skills-cards-list {
-    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .min-skill-badge,
+  .min-skill-card {
+    padding: 7px 11px;
+    font-size: 0.84rem;
   }
   .min-category-tab {
     font-size: 0.82rem;

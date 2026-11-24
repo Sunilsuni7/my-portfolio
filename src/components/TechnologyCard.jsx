@@ -5,14 +5,15 @@ export default function TechnologyCard({ skill }) {
 
   return (
     <div 
-      className="min-skill-card"
+      className="min-skill-badge min-skill-card"
       tabIndex={0}
       role="listitem"
+      aria-label={skill.name}
     >
-      <div className="min-skill-icon-wrap" aria-hidden="true">
-        {Icon && <Icon size={18} />}
+      <div className="min-skill-badge-icon min-skill-icon-wrap" aria-hidden="true">
+        {Icon && <Icon size={16} />}
       </div>
-      <span className="min-skill-name">{skill.name}</span>
+      <span className="min-skill-badge-name min-skill-name">{skill.name}</span>
     </div>
   );
 }
