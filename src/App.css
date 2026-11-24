@@ -1901,6 +1901,54 @@ img {
   letter-spacing: -0.01em;
 }
 
+/* PROJECT MEDIA / SCREENSHOT THUMBNAIL */
+.min-project-media-wrap {
+  width: 100%;
+  margin: 16px 0 20px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-inner);
+  aspect-ratio: 16 / 9;
+  position: relative;
+  transition: border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.min-project-card:hover .min-project-media-wrap {
+  border-color: rgba(214, 195, 161, 0.35);
+}
+
+.min-project-media-wrap:hover {
+  border-color: rgba(214, 195, 161, 0.6) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 18px rgba(214, 195, 161, 0.2) !important;
+}
+
+.min-project-img-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+.min-project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.3s ease;
+}
+
+.min-project-card:hover .min-project-img,
+.min-project-img-link:hover .min-project-img {
+  transform: scale(1.03);
+}
+
 .min-project-overview {
   font-family: var(--font-serif);
   font-size: 0.98rem;

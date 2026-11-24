@@ -1,8 +1,12 @@
+import classicShopImg from "../assets/classic-online-shop.png";
+
 export const projects = [
   {
     id: "classic-online-shop",
     title: "Classic Online Shop",
     category: "E-Commerce Web Application",
+    image: classicShopImg,
+    imagePublicPath: "classic-online-shop.png",
     overview:
       "A responsive e-commerce web application with a clean, user-friendly interface, structured navigation, and complete shopping cart capabilities.",
     features: [

@@ -23,6 +23,26 @@ export default function ProjectCard({ project }) {
         </h3>
       </div>
 
+      {/* PROJECT SCREENSHOT / MEDIA */}
+      {project.image && (
+        <div className="min-project-media-wrap">
+          <a
+            href={project.liveDemo || project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="min-project-img-link"
+            aria-label={`View live demo of ${project.title}`}
+          >
+            <img
+              src={project.image}
+              alt={`${project.title} Screenshot`}
+              className="min-project-img"
+              loading="lazy"
+            />
+          </a>
+        </div>
+      )}
+
       {/* OVERVIEW */}
       <p className="min-project-overview">
         {project.overview}
