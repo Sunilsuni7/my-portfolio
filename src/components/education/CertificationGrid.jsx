@@ -3,7 +3,71 @@ import { createPortal } from 'react-dom';
 import CertificationCard from './CertificationCard';
 import { certifications } from '../../data/certifications';
 import ScrollReveal from '../common/ScrollReveal';
-import { Award, Calendar, CheckCircle, Maximize2, X, ExternalLink, User } from 'lucide-react';
+import { Award, Calendar, CheckCircle2, ShieldCheck, Maximize2, X, ExternalLink, User } from 'lucide-react';
+import { SiInfosys, SiCoursera } from 'react-icons/si';
+
+// Provider Logo for IBM
+function IbmLogo({ size = 16, className = "" }) {
+  return (
+    <svg
+      width={size * 2}
+      height={size * 0.8}
+      viewBox="0 0 60 24"
+      fill="currentColor"
+      className={className}
+      aria-label="IBM"
+    >
+      <path d="M0 0h8v2H0zm0 3h8v2H0zm0 3h8v2H0zm0 3h8v2H0zm0 3h8v2H0zm0 3h8v2H0zm0 3h8v2H0zm0 3h8v2H0zm11-21h12v2H11zm0 3h12v2H11zm0 3h4v2h-4zm8 0h4v2h-4zm-8 3h4v2h-4zm8 0h4v2h-4zm-8 3h12v2H11zm0 3h12v2H11zm0 3h4v2h-4zm8 0h4v2h-4zm-8 3h4v2h-4zm8 0h4v2h-4zm-8 3h12v2H11zm15-21h18v2h-18zm0 3h18v2h-18zm0 3h3v2h-3zm12 0h3v2h-3zm-12 3h3v2h-3zm12 0h3v2h-3zm-12 3h18v2h-18zm0 3h18v2h-18zm0 3h3v2h-3zm12 0h3v2h-3zm-12 3h3v2h-3zm12 0h3v2h-3zm-12 3h18v2h-18zm21-21h3v2h-3zm0 3h3v2h-3zm0 3h3v2h-3zm0 3h3v2h-3zm0 3h3v2h-3zm0 3h3v2h-3zm0 3h3v2h-3zm0 3h3v2h-3z" />
+    </svg>
+  );
+}
+
+// Provider Logo for Deloitte
+function DeloitteLogo({ size = 16, className = "" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      className={className}
+      aria-label="Deloitte"
+    >
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+      <circle cx="18" cy="15" r="2.2" fill="#86BC25" />
+      <text
+        x="6.5"
+        y="15.5"
+        fontSize="11"
+        fontWeight="bold"
+        fill="currentColor"
+        fontFamily="'Times New Roman', serif"
+      >
+        D
+      </text>
+    </svg>
+  );
+}
+
+// Provider Icon Helper
+function ProviderIcon({ org, size = 15 }) {
+  if (org.includes("Infosys")) {
+    return <SiInfosys size={size} className="min-provider-icon infosys" />;
+  }
+  if (org.includes("IBM")) {
+    return (
+      <span className="min-provider-dual-badge">
+        <IbmLogo size={size * 0.9} className="min-provider-icon ibm" />
+        <span className="min-provider-divider">/</span>
+        <SiCoursera size={size} className="min-provider-icon coursera" />
+      </span>
+    );
+  }
+  if (org.includes("Deloitte")) {
+    return <DeloitteLogo size={size + 2} className="min-provider-icon deloitte" />;
+  }
+  return <Award size={size} className="min-provider-icon default" />;
+}
 
 export default function CertificationGrid() {
   const [activeModalCert, setActiveModalCert] = useState(null);
@@ -63,8 +127,8 @@ export default function CertificationGrid() {
                     />
                     <div className="min-cert-hover-overlay" aria-hidden="true">
                       <span className="min-cert-zoom-pill">
-                        <Maximize2 size={15} />
-                        <span>Click to view larger</span>
+                        <Maximize2 size={14} />
+                        <span>Click to expand</span>
                       </span>
                     </div>
                   </div>
@@ -73,19 +137,31 @@ export default function CertificationGrid() {
 
               {/* RIGHT / BOTTOM: CERTIFICATE DETAILS */}
               <div className="min-featured-cert-content">
+                {/* SMALL ELEGANT BADGES ROW */}
                 <div className="min-cert-badge-row">
-                  <span className="min-cert-verified-pill">
-                    <CheckCircle size={14} className="min-verified-icon" />
-                    Verified Certificate
+                  <span className="min-cert-pill min-pill-verified">
+                    <ShieldCheck size={13} className="min-pill-icon" />
+                    <span>Verified Credential</span>
                   </span>
-                  <span className="min-cert-org-badge">{cert.organization}</span>
+                  <span className="min-cert-pill min-pill-provider">
+                    <ProviderIcon org={cert.organization} size={14} />
+                    <span>{cert.organization}</span>
+                  </span>
+                  <span className="min-cert-pill min-pill-date">
+                    <Calendar size={12} className="min-pill-icon" />
+                    <span>{cert.completionDate || cert.date}</span>
+                  </span>
                 </div>
 
+                {/* CERTIFICATION TITLE */}
                 <h4 className="min-featured-cert-title">{cert.title}</h4>
 
+                {/* CONSISTENT METADATA GRID */}
                 <div className="min-cert-meta-grid">
                   <div className="min-cert-meta-item">
-                    <User size={14} className="min-meta-icon" />
+                    <div className="min-meta-icon-box" aria-hidden="true">
+                      <User size={14} className="min-meta-icon" />
+                    </div>
                     <div>
                       <span className="min-meta-label">Recipient</span>
                       <strong className="min-meta-value">{cert.recipient}</strong>
@@ -93,45 +169,40 @@ export default function CertificationGrid() {
                   </div>
 
                   <div className="min-cert-meta-item">
-                    <Award size={14} className="min-meta-icon" />
+                    <div className="min-meta-icon-box" aria-hidden="true">
+                      <ProviderIcon org={cert.organization} size={14} />
+                    </div>
                     <div>
                       <span className="min-meta-label">Organization</span>
                       <strong className="min-meta-value">{cert.organization}</strong>
                     </div>
                   </div>
 
-                  {cert.completionDate && cert.issuedDate ? (
-                    <>
-                      <div className="min-cert-meta-item">
-                        <Calendar size={14} className="min-meta-icon" />
-                        <div>
-                          <span className="min-meta-label">Completion Date</span>
-                          <strong className="min-meta-value">{cert.completionDate}</strong>
-                        </div>
-                      </div>
-
-                      <div className="min-cert-meta-item">
-                        <Calendar size={14} className="min-meta-icon" />
-                        <div>
-                          <span className="min-meta-label">Issued Date</span>
-                          <strong className="min-meta-value">{cert.issuedDate}</strong>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="min-cert-meta-item">
+                  <div className="min-cert-meta-item">
+                    <div className="min-meta-icon-box" aria-hidden="true">
                       <Calendar size={14} className="min-meta-icon" />
-                      <div>
-                        <span className="min-meta-label">Date</span>
-                        <strong className="min-meta-value">{cert.completionDate || cert.date}</strong>
-                      </div>
                     </div>
-                  )}
+                    <div>
+                      <span className="min-meta-label">Completion Date</span>
+                      <strong className="min-meta-value">{cert.completionDate || cert.date}</strong>
+                    </div>
+                  </div>
+
+                  <div className="min-cert-meta-item">
+                    <div className="min-meta-icon-box" aria-hidden="true">
+                      <Award size={14} className="min-meta-icon" />
+                    </div>
+                    <div>
+                      <span className="min-meta-label">Credential Status</span>
+                      <strong className="min-meta-value">{cert.issuedDate ? `Issued ${cert.issuedDate}` : 'Verified & Completed'}</strong>
+                    </div>
+                  </div>
                 </div>
 
+                {/* CORE COMPETENCIES */}
                 {cert.skills && (
                   <div className="min-featured-cert-skills">
-                    <span className="min-skills-label">Core Competencies:</span>
+                    <span className="min-skills-label">Core Competencies</span>
                     <div className="min-skills-tags-wrap">
                       {cert.skills.map((skill) => (
                         <span key={skill} className="min-cert-skill-tag">
@@ -142,6 +213,7 @@ export default function CertificationGrid() {
                   </div>
                 )}
 
+                {/* ACTION BUTTON */}
                 <div className="min-cert-actions">
                   <button
                     type="button"
