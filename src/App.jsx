@@ -8,6 +8,7 @@ import Education from "./components/education/Education";
 import About from "./components/About";
 import Contact from "./components/contact/Contact";
 import ScrollReveal from "./components/common/ScrollReveal";
+import WaveBackground from "./components/common/WaveBackground";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { ArrowUp } from "lucide-react";
 import "./App.css";
@@ -71,19 +72,8 @@ function App() {
 
   return (
     <div className="portfolio-root">
-      {/* AMBIENT BACKGROUND: Subtle grey radial gradients & elegant diagonal abstract shapes */}
-      <div className="portfolio-bg-layer" aria-hidden="true">
-        <div className="bg-radial-gradient top-right" />
-        <div className="bg-radial-gradient mid-left" />
-        <div className="bg-radial-gradient bottom-right" />
-        <div className="bg-diagonal-shapes">
-          <div className="diagonal-facet facet-1" />
-          <div className="diagonal-facet facet-2" />
-          <div className="diagonal-accent-line line-1" />
-          <div className="diagonal-accent-line line-2" />
-          <div className="diagonal-accent-line line-3" />
-        </div>
-      </div>
+      {/* ANIMATED MULTI-COLOUR WAVE BACKGROUND */}
+      <WaveBackground />
 
       {/* FLOATING MODERN NAVIGATION BAR */}
       <Navbar activeSection={activeSection} />

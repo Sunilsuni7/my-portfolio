@@ -25,13 +25,21 @@
    DESIGN TOKENS & ROOT VARIABLES
    -------------------------------------------------------------------------- */
 :root {
-  /* Premium Matte Black & Charcoal Color System */
-  --bg-primary: #08090B;
-  --bg-secondary: #111214;
-  --bg-card: #17181B;
-  --bg-card-hover: #1f2025;
-  --bg-inner: #121316;
-  --bg-inner-hover: #1a1b1f;
+  /* Deep Navy & Charcoal Wave Background Color System */
+  --bg-primary: #080E18;
+  --bg-secondary: #101B2B;
+  --bg-card: #19283A;
+  --bg-card-hover: #21354c;
+  --bg-inner: #132235;
+  --bg-inner-hover: #1b2e47;
+
+  /* Animated Wave Palette */
+  --wave-ice-blue: #8BBCE8;
+  --wave-cyan: #55C7D9;
+  --wave-muted-teal: #4DADA5;
+  --wave-soft-violet: #8584C7;
+  --wave-metallic-silver: #AEBAC8;
+  --wave-deep-blue: #30485E;
 
   /* Text System */
   --text-heading: #F5F5F5;
@@ -50,8 +58,8 @@
   --accent-glow: rgba(214, 183, 122, 0.18);
 
   /* Thin Understated Borders & Dividers */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-card: rgba(255, 255, 255, 0.07);
+  --border-subtle: rgba(139, 188, 232, 0.11);
+  --border-card: rgba(139, 188, 232, 0.09);
   --border-hover: rgba(214, 183, 122, 0.35);
   --border-accent: #D6B77A;
 
@@ -160,7 +168,10 @@ img {
   overflow-x: hidden;
 }
 
-.portfolio-bg-layer {
+/* --------------------------------------------------------------------------
+   ANIMATED MULTI-COLOUR WAVE BACKGROUND SYSTEM
+   -------------------------------------------------------------------------- */
+.wave-bg-viewport {
   position: fixed;
   inset: 0;
   pointer-events: none;
@@ -169,100 +180,288 @@ img {
   background-color: var(--bg-primary);
 }
 
-/* Subtle Grey Radial Gradients */
-.bg-radial-gradient {
+.wave-defs-svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* 1. Deep Ambient Glows & Mesh Gradients */
+.wave-ambient-glow {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
+  mix-blend-mode: screen;
 }
 
-.bg-radial-gradient.top-right {
-  top: -15%;
-  right: -10%;
+.wave-ambient-glow.glow-top {
+  top: -12%;
+  right: -8%;
   width: 75vw;
-  height: 70vh;
-  background: radial-gradient(circle, rgba(120, 125, 140, 0.075) 0%, rgba(40, 44, 52, 0.025) 50%, transparent 75%);
-  filter: blur(45px);
-}
-
-.bg-radial-gradient.mid-left {
-  top: 36%;
-  left: -12%;
-  width: 65vw;
   height: 65vh;
-  background: radial-gradient(circle, rgba(95, 100, 115, 0.065) 0%, rgba(30, 33, 40, 0.02) 50%, transparent 75%);
-  filter: blur(50px);
+  background: radial-gradient(circle, rgba(48, 72, 94, 0.22) 0%, rgba(85, 199, 217, 0.08) 45%, transparent 75%);
+  filter: blur(65px);
 }
 
-.bg-radial-gradient.bottom-right {
-  bottom: -10%;
-  right: -5%;
+.wave-ambient-glow.glow-mid {
+  top: 38%;
+  left: -15%;
   width: 70vw;
-  height: 65vh;
-  background: radial-gradient(circle, rgba(110, 115, 130, 0.07) 0%, rgba(35, 38, 46, 0.02) 50%, transparent 75%);
-  filter: blur(45px);
+  height: 60vh;
+  background: radial-gradient(circle, rgba(77, 173, 165, 0.12) 0%, rgba(48, 72, 94, 0.05) 50%, transparent 75%);
+  filter: blur(75px);
 }
 
-/* Elegant Diagonal Abstract Shapes */
-.bg-diagonal-shapes {
+.wave-ambient-glow.glow-bottom {
+  bottom: -15%;
+  right: -5%;
+  width: 75vw;
+  height: 65vh;
+  background: radial-gradient(circle, rgba(133, 132, 199, 0.14) 0%, rgba(85, 199, 217, 0.05) 50%, transparent 75%);
+  filter: blur(70px);
+}
+
+/* 2. Hero Flowing Wave Layers */
+.hero-waves-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: min(100vh, 920px);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
+}
+
+.wave-track {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 200%;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.wave-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Layer 1: Foreground Wave (Ice Blue, Cyan, Teal, Deep Blue) */
+.wave-track-1 {
+  height: 480px;
+  bottom: -20px;
+  filter: blur(14px);
+  opacity: 0.88;
+  animation: waveMotion1 24s ease-in-out infinite alternate;
+}
+
+/* Layer 2: Cresting Ribbon (Soft Violet, Cyan, Metallic Silver) */
+.wave-track-2 {
+  height: 500px;
+  bottom: 25px;
+  filter: blur(22px);
+  opacity: 0.84;
+  animation: waveMotion2 34s ease-in-out infinite alternate;
+}
+
+/* Layer 3: Mid Depth Wave (Muted Teal, Ice Blue, Soft Violet) */
+.wave-track-3 {
+  height: 520px;
+  bottom: 70px;
+  filter: blur(30px);
+  opacity: 0.78;
+  animation: waveMotion3 44s ease-in-out infinite alternate;
+}
+
+/* Layer 4: Deep Atmospheric Wave (Deep Blue, Violet, Cyan) */
+.wave-track-4 {
+  height: 540px;
+  bottom: 115px;
+  filter: blur(42px);
+  opacity: 0.72;
+  animation: waveMotion4 56s ease-in-out infinite alternate;
+}
+
+/* Wave Keyframes: Continuous Horizontal Movement + Gentle Vertical Oscillation */
+@keyframes waveMotion1 {
+  0% {
+    transform: translate3d(-2%, 0px, 0) scaleY(1);
+  }
+  50% {
+    transform: translate3d(-24%, -16px, 0) scaleY(1.03);
+  }
+  100% {
+    transform: translate3d(-46%, 12px, 0) scaleY(0.97);
+  }
+}
+
+@keyframes waveMotion2 {
+  0% {
+    transform: translate3d(-45%, 10px, 0) scaleY(0.96);
+  }
+  50% {
+    transform: translate3d(-22%, -18px, 0) scaleY(1.04);
+  }
+  100% {
+    transform: translate3d(-2%, 8px, 0) scaleY(1);
+  }
+}
+
+@keyframes waveMotion3 {
+  0% {
+    transform: translate3d(-5%, -10px, 0) scaleY(1.02);
+  }
+  50% {
+    transform: translate3d(-26%, 14px, 0) scaleY(0.98);
+  }
+  100% {
+    transform: translate3d(-44%, -8px, 0) scaleY(1.03);
+  }
+}
+
+@keyframes waveMotion4 {
+  0% {
+    transform: translate3d(-42%, 8px, 0) scaleY(0.97);
+  }
+  50% {
+    transform: translate3d(-20%, -14px, 0) scaleY(1.02);
+  }
+  100% {
+    transform: translate3d(-3%, 12px, 0) scaleY(1);
+  }
+}
+
+/* 3. Subtle Page-wide Waves */
+.page-waves-subtle {
   position: absolute;
   inset: 0;
+  overflow: hidden;
   pointer-events: none;
 }
 
-.diagonal-facet {
+.subtle-wave-track {
   position: absolute;
+  left: 0;
+  width: 200%;
   pointer-events: none;
+  will-change: transform;
 }
 
-.diagonal-facet.facet-1 {
-  top: -8%;
-  right: -5%;
-  width: 65vw;
-  height: 52vh;
-  transform: rotate(-25deg);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.016) 0%, rgba(255, 255, 255, 0.002) 80%, transparent 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.028);
+.subtle-wave-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-.diagonal-facet.facet-2 {
-  top: 48%;
-  left: -15%;
-  width: 75vw;
-  height: 48vh;
-  transform: rotate(-22deg);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.012) 0%, rgba(255, 255, 255, 0.001) 75%, transparent 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.022);
+.subtle-wave-track.track-mid {
+  top: 36%;
+  height: 380px;
+  filter: blur(45px);
+  opacity: 0.65;
+  animation: subtleWaveMid 65s ease-in-out infinite alternate;
 }
 
-.diagonal-accent-line {
+.subtle-wave-track.track-lower {
+  top: 68%;
+  height: 380px;
+  filter: blur(52px);
+  opacity: 0.60;
+  animation: subtleWaveLower 80s ease-in-out infinite alternate;
+}
+
+@keyframes subtleWaveMid {
+  0% {
+    transform: translate3d(-3%, -12px, 0);
+  }
+  50% {
+    transform: translate3d(-25%, 16px, 0);
+  }
+  100% {
+    transform: translate3d(-45%, -8px, 0);
+  }
+}
+
+@keyframes subtleWaveLower {
+  0% {
+    transform: translate3d(-44%, 10px, 0);
+  }
+  50% {
+    transform: translate3d(-22%, -14px, 0);
+  }
+  100% {
+    transform: translate3d(-4%, 12px, 0);
+  }
+}
+
+/* 4. Subtle Radial Color Accents */
+.wave-accent-orb {
   position: absolute;
-  height: 1px;
+  border-radius: 50%;
   pointer-events: none;
+  mix-blend-mode: screen;
 }
 
-.diagonal-accent-line.line-1 {
-  top: 18%;
-  left: -20%;
-  width: 140vw;
-  transform: rotate(-22deg);
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.035) 25%, rgba(214, 183, 122, 0.05) 50%, rgba(255, 255, 255, 0.03) 75%, transparent 100%);
+.wave-accent-orb.orb-teal {
+  top: 24%;
+  left: 12%;
+  width: 440px;
+  height: 440px;
+  background: radial-gradient(circle, rgba(77, 173, 165, 0.08) 0%, transparent 70%);
+  filter: blur(55px);
+  animation: floatOrb1 32s ease-in-out infinite alternate;
 }
 
-.diagonal-accent-line.line-2 {
+.wave-accent-orb.orb-violet {
   top: 56%;
-  left: -20%;
-  width: 140vw;
-  transform: rotate(-22deg);
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.03) 30%, rgba(214, 183, 122, 0.04) 55%, transparent 100%);
+  right: 10%;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(133, 132, 199, 0.07) 0%, transparent 70%);
+  filter: blur(60px);
+  animation: floatOrb2 40s ease-in-out infinite alternate;
 }
 
-.diagonal-accent-line.line-3 {
-  top: 84%;
-  left: -20%;
-  width: 140vw;
-  transform: rotate(-22deg);
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.025) 40%, rgba(214, 183, 122, 0.035) 60%, transparent 100%);
+.wave-accent-orb.orb-cyan {
+  top: 80%;
+  left: 18%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(85, 199, 217, 0.06) 0%, transparent 70%);
+  filter: blur(50px);
+  animation: floatOrb3 48s ease-in-out infinite alternate;
+}
+
+@keyframes floatOrb1 {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(30px, -25px, 0);
+  }
+}
+
+@keyframes floatOrb2 {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-25px, 20px, 0);
+  }
+}
+
+@keyframes floatOrb3 {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(20px, -18px, 0);
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -3279,6 +3478,12 @@ img {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  .wave-track,
+  .subtle-wave-track,
+  .wave-accent-orb {
+    animation: none !important;
+    transform: translate3d(-15%, 0, 0) !important;
   }
 }
 
