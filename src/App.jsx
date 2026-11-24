@@ -138,7 +138,15 @@ function App() {
             >
               <FaLinkedin size={18} />
             </a>
-            <a href="#home" className="pro-back-to-top" aria-label="Back to top">
+            <a 
+              href="#home" 
+              className="pro-back-to-top" 
+              aria-label="Back to top"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            >
               <ArrowUp size={16} />
             </a>
           </div>
