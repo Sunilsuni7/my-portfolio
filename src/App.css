@@ -1184,11 +1184,10 @@ img {
   background: var(--accent);
 }
 
-/* HERO NAME: SUNIL S */
+/* HERO NAME: SUNIL S - PHASE 8 ANIMATED GRADIENT & SHIMMER */
 .min-hero-name {
   font-family: var(--font-heading);
   font-weight: 700;
-  color: #F5F5F5 !important;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   margin-bottom: 12px;
@@ -1225,6 +1224,54 @@ img {
   }
 }
 
+/* CONTINUOUS FLOWING GRADIENT & MOVING SHIMMER ACROSS SUNIL S */
+.sunil-animated-name {
+  display: inline-block;
+  color: #F5F1F3;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: inherit;
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    110deg,
+    /* Cycle 1 */
+    #F5F1F3 0%,
+    #D19BBE 12%,
+    #B987A8 22%,
+    #694D68 28%,
+    #B987A8 34%,
+    #D19BBE 40%,
+    #FFFFFF 45%,
+    #F5F1F3 50%,
+    /* Cycle 2 (exact duplicate for seamless looping) */
+    #F5F1F3 50%,
+    #D19BBE 62%,
+    #B987A8 72%,
+    #694D68 78%,
+    #B987A8 84%,
+    #D19BBE 90%,
+    #FFFFFF 95%,
+    #F5F1F3 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: sunilFlowingGradient 8s linear infinite;
+  filter: drop-shadow(0 0 20px rgba(209, 155, 190, 0.28))
+          drop-shadow(0 0 1px rgba(245, 241, 243, 0.25));
+  will-change: background-position;
+}
+
+@keyframes sunilFlowingGradient {
+  0% {
+    background-position: 200% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .hero-name-word {
   display: inline-flex;
   white-space: nowrap;
@@ -1247,8 +1294,8 @@ img {
 .hero-name-reveal {
   opacity: 0;
   transform: translateY(14px);
-  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
@@ -1318,6 +1365,16 @@ img {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+  }
+
+  .sunil-animated-name {
+    animation: none !important;
+    background-image: linear-gradient(110deg, #F5F1F3 0%, #D19BBE 50%, #B987A8 100%) !important;
+    background-position: 50% 50% !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    filter: drop-shadow(0 0 10px rgba(209, 155, 190, 0.2)) !important;
   }
 }
 

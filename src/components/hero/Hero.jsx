@@ -58,32 +58,12 @@ export default function Hero() {
             1. LEFT COLUMN: HERO INFORMATION & ACTIONS
             ------------------------------------------------------------------ */}
         <div className="min-hero-left">
-          {/* Main Heading with Smooth Fade-in, Upward Reveal, and Letter-by-Letter Animation */}
+          {/* Main Heading with Smooth Fade-in and Flowing Gradient Shimmer Animation (PHASE 8) */}
           <h1 
             className={`min-hero-name hero-name-reveal ${isHeroVisible ? 'visible' : ''}`} 
             aria-label="SUNIL S"
           >
-            <span className="hero-name-word">
-              {"SUNIL".split("").map((char, index) => (
-                <span
-                  key={index}
-                  className={`hero-name-char ${isHeroVisible ? 'visible' : ''}`}
-                  style={{ transitionDelay: `${index * 60}ms` }}
-                  aria-hidden="true"
-                >
-                  {char}
-                </span>
-              ))}
-            </span>
-            <span className="hero-name-word">
-              <span
-                className={`hero-name-char ${isHeroVisible ? 'visible' : ''}`}
-                style={{ transitionDelay: `${5 * 60}ms` }}
-                aria-hidden="true"
-              >
-                S
-              </span>
-            </span>
+            <span className="sunil-animated-name">SUNIL&nbsp;S</span>
           </h1>
 
           {/* Education Title - Smooth fade-in starting shortly after main heading */}
