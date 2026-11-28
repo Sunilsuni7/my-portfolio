@@ -1,0 +1,913 @@
+/* ==========================================================================
+   DEVELOPER-THEMED WELCOME SCREEN — SUNIL S PORTFOLIO
+   Theme: Developer Workstation Atmosphere (#080E18, #101B2B, #19283A)
+   Accents: Ice Blue (#8BBCE8), Cyan (#55C7D9), Muted Teal (#4DADA5), Silver (#AEBAC8)
+   Typography: Universal Times New Roman ("Times New Roman", Times, Georgia, serif)
+   ========================================================================== */
+
+.welcome-screen-root {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background-color: #080E18;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: "Times New Roman", Times, Georgia, serif;
+  color: #F5F5F5;
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.welcome-screen-exit {
+  opacity: 0;
+  transform: scale(1.035);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   1. DEVELOPER WORKSPACE BACKDROP & AMBIENT LIGHTING
+   -------------------------------------------------------------------------- */
+.dev-workspace-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 30%, #101B2B 0%, #080E18 80%, #05080E 100%);
+}
+
+/* Subtle developer perspective grid pattern */
+.dev-grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(85, 199, 217, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(85, 199, 217, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center center;
+  mask-image: radial-gradient(circle at 50% 45%, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(circle at 50% 45%, black 40%, transparent 85%);
+  pointer-events: none;
+}
+
+/* Soft ambient lighting pools */
+.dev-ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.glow-cyan {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, #55C7D9 0%, transparent 70%);
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.22;
+}
+
+.glow-ice-blue {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, #8BBCE8 0%, transparent 70%);
+  top: 5%;
+  left: 18%;
+  opacity: 0.15;
+}
+
+.glow-violet {
+  width: 440px;
+  height: 440px;
+  background: radial-gradient(circle, #8584C7 0%, transparent 70%);
+  bottom: 10%;
+  right: 15%;
+  opacity: 0.14;
+}
+
+/* --------------------------------------------------------------------------
+   FLOATING CODE SYMBOLS & PROGRAMMING SYNTAX
+   -------------------------------------------------------------------------- */
+.dev-floating-syntax-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-syntax {
+  position: absolute;
+  font-family: "JetBrains Mono", Consolas, "Courier New", monospace;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  user-select: none;
+  opacity: 0.22;
+  transition: opacity 0.3s ease;
+}
+
+.token-1 {
+  top: 14%;
+  left: 8%;
+  font-size: 1.6rem;
+  color: #55C7D9;
+  animation: floatSyntaxSlow 9s ease-in-out infinite;
+}
+
+.token-2 {
+  top: 22%;
+  right: 10%;
+  font-size: 1.8rem;
+  color: #8BBCE8;
+  animation: floatSyntaxMed 8s ease-in-out infinite 1s;
+}
+
+.token-3 {
+  top: 68%;
+  left: 9%;
+  font-size: 1.1rem;
+  color: #4DADA5;
+  animation: floatSyntaxSlow 11s ease-in-out infinite 2s;
+}
+
+.token-4 {
+  top: 38%;
+  left: 14%;
+  font-size: 1.4rem;
+  color: #8584C7;
+  animation: floatSyntaxMed 10s ease-in-out infinite 0.5s;
+}
+
+.token-5 {
+  top: 55%;
+  right: 12%;
+  font-size: 1.15rem;
+  color: #AEBAC8;
+  animation: floatSyntaxSlow 8.5s ease-in-out infinite 3s;
+}
+
+.token-6 {
+  top: 10%;
+  right: 25%;
+  font-size: 1.05rem;
+  color: #8584C7;
+  animation: floatSyntaxMed 12s ease-in-out infinite 1.5s;
+}
+
+.token-7 {
+  bottom: 24%;
+  left: 20%;
+  font-size: 1.2rem;
+  color: #55C7D9;
+  animation: floatSyntaxSlow 9.5s ease-in-out infinite 2.5s;
+}
+
+.token-8 {
+  top: 30%;
+  right: 6%;
+  font-size: 0.95rem;
+  color: #4DADA5;
+  animation: floatSyntaxMed 10.5s ease-in-out infinite 0.8s;
+}
+
+.token-9 {
+  bottom: 16%;
+  right: 22%;
+  font-size: 1.15rem;
+  color: #8BBCE8;
+  animation: floatSyntaxSlow 8s ease-in-out infinite 1.8s;
+}
+
+.token-10 {
+  top: 80%;
+  left: 5%;
+  font-size: 1.3rem;
+  color: #AEBAC8;
+  opacity: 0.15;
+  animation: floatSyntaxMed 11s ease-in-out infinite 3.5s;
+}
+
+.token-11 {
+  bottom: 30%;
+  right: 8%;
+  font-size: 1.05rem;
+  color: #55C7D9;
+  animation: floatSyntaxSlow 10s ease-in-out infinite 2.2s;
+}
+
+.token-12 {
+  top: 25%;
+  left: 22%;
+  font-size: 1.25rem;
+  color: #8BBCE8;
+  animation: floatSyntaxMed 9s ease-in-out infinite 1.2s;
+}
+
+@keyframes floatSyntaxSlow {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-16px) rotate(2deg);
+  }
+}
+
+@keyframes floatSyntaxMed {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-22px) rotate(-2deg);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   REALISTIC PROGRAMMING MONITOR & DESK SCENERY
+   -------------------------------------------------------------------------- */
+.dev-workstation-scenery {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(1080px, 94vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0.55;
+  filter: contrast(102%) brightness(96%);
+  transition: opacity 0.4s ease;
+}
+
+/* Bias backlight behind monitor */
+.monitor-bias-lighting {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  height: 65%;
+  background: radial-gradient(ellipse at center, rgba(85, 199, 217, 0.28) 0%, rgba(139, 188, 232, 0.12) 50%, transparent 80%);
+  filter: blur(50px);
+  z-index: 1;
+}
+
+/* Monitor outer body */
+.dev-monitor-chassis {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 960px;
+  background: #0E1624;
+  border-radius: 14px;
+  border: 1px solid rgba(139, 188, 232, 0.25);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.85),
+    0 0 32px rgba(85, 199, 217, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dev-monitor-bezel-top {
+  height: 14px;
+  background: #0C121D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.monitor-webcam-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(85, 199, 217, 0.5);
+  box-shadow: 0 0 4px rgba(85, 199, 217, 0.8);
+}
+
+/* Monitor Screen Surface: Dark Code Editor */
+.dev-editor-display {
+  background: #080E18;
+  display: flex;
+  flex-direction: column;
+  height: 440px;
+  overflow: hidden;
+}
+
+/* Editor Window Header */
+.dev-editor-header {
+  height: 38px;
+  background: #101B2B;
+  border-bottom: 1px solid rgba(139, 188, 232, 0.14);
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 16px;
+}
+
+.dev-window-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.window-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-close { background: #E06C75; opacity: 0.85; }
+.dot-minimize { background: #E5C07B; opacity: 0.85; }
+.dot-maximize { background: #98C379; opacity: 0.85; }
+
+.dev-editor-tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 100%;
+}
+
+.dev-editor-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  height: 100%;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.76rem;
+  color: #AEBAC8;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dev-editor-tab.active {
+  background: #080E18;
+  color: #55C7D9;
+  border-top: 2px solid #55C7D9;
+  font-weight: 500;
+}
+
+.tab-icon {
+  color: #55C7D9;
+}
+
+.dev-editor-breadcrumb {
+  margin-left: auto;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.7rem;
+  color: #6C7D93;
+}
+
+/* Editor Code Surface */
+.dev-code-surface {
+  flex: 1;
+  padding: 14px 18px;
+  font-family: "JetBrains Mono", Consolas, "Courier New", monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  overflow: hidden;
+  background: #080E18;
+}
+
+.dev-code-line {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  opacity: 0.25;
+  transition: opacity 0.3s ease;
+  white-space: pre;
+}
+
+.dev-code-line.line-revealed {
+  opacity: 0.85;
+}
+
+.line-num {
+  width: 22px;
+  color: #3E546B;
+  font-size: 0.72rem;
+  text-align: right;
+  user-select: none;
+}
+
+.line-content {
+  color: #D2D9E2;
+}
+
+.line-comment .line-content { color: #5C748D; font-style: italic; }
+.line-import .line-content { color: #8584C7; }
+.line-decl .line-content { color: #55C7D9; }
+.line-prop .line-content { color: #8BBCE8; }
+.line-func .line-content { color: #4DADA5; }
+.line-body .line-content { color: #AEBAC8; }
+
+/* Editor Bottom Terminal */
+.dev-editor-terminal {
+  height: 84px;
+  background: #0B1320;
+  border-top: 1px solid rgba(139, 188, 232, 0.12);
+  display: flex;
+  flex-direction: column;
+  padding: 8px 16px;
+  font-family: "JetBrains Mono", Consolas, monospace;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  color: #7A90A8;
+  margin-bottom: 6px;
+}
+
+.terminal-icon {
+  color: #55C7D9;
+}
+
+.terminal-status {
+  margin-left: auto;
+  font-size: 0.65rem;
+  color: #4DADA5;
+  letter-spacing: 0.5px;
+}
+
+.terminal-body {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: #D2D9E2;
+}
+
+.terminal-prompt {
+  color: #55C7D9;
+}
+
+.terminal-cmd {
+  color: #AEBAC8;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  background: #55C7D9;
+  animation: cursorBlink 1s infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* Monitor Neck and Base */
+.dev-monitor-neck {
+  width: 48px;
+  height: 38px;
+  background: linear-gradient(180deg, #101B2B 0%, #0B1320 100%);
+  border: 1px solid rgba(139, 188, 232, 0.16);
+  border-top: none;
+  border-bottom: none;
+  margin: 0 auto;
+}
+
+.dev-monitor-base {
+  width: 170px;
+  height: 10px;
+  background: linear-gradient(180deg, #19283A 0%, #0E1624 100%);
+  border-radius: 4px;
+  border: 1px solid rgba(139, 188, 232, 0.22);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+  margin: 0 auto;
+}
+
+/* Desk Surface */
+.dev-desk-surface {
+  position: relative;
+  width: 100%;
+  max-width: 1020px;
+  height: 48px;
+  background: linear-gradient(180deg, #0D1624 0%, #070B12 100%);
+  border-top: 1px solid rgba(85, 199, 217, 0.2);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -4px;
+  border-radius: 6px 6px 0 0;
+}
+
+.desk-mat {
+  width: 420px;
+  height: 28px;
+  background: rgba(16, 27, 43, 0.85);
+  border-radius: 4px;
+  border: 1px solid rgba(139, 188, 232, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keyboard-chassis {
+  position: relative;
+  width: 240px;
+  height: 16px;
+  background: #080E18;
+  border-radius: 3px;
+  border: 1px solid rgba(85, 199, 217, 0.25);
+  box-shadow: 0 0 10px rgba(85, 199, 217, 0.15);
+}
+
+.keyboard-keys-hint {
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(90deg, rgba(139, 188, 232, 0.12) 0px, rgba(139, 188, 232, 0.12) 4px, transparent 4px, transparent 8px);
+}
+
+.dev-desk-accessory.coffee-mug {
+  position: absolute;
+  right: 60px;
+  top: 10px;
+  width: 18px;
+  height: 22px;
+  background: #19283A;
+  border: 1px solid rgba(139, 188, 232, 0.25);
+  border-radius: 0 0 4px 4px;
+}
+
+.coffee-steam {
+  position: absolute;
+  top: -12px;
+  left: 6px;
+  width: 5px;
+  height: 12px;
+  background: radial-gradient(circle, rgba(139, 188, 232, 0.3) 0%, transparent 80%);
+  filter: blur(2px);
+  animation: steamRise 3s infinite ease-out;
+}
+
+@keyframes steamRise {
+  0% { transform: translateY(0) scaleX(1); opacity: 0.4; }
+  100% { transform: translateY(-10px) scaleX(1.8); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   2. CENTRAL PROMINENT WELCOME CARD
+   -------------------------------------------------------------------------- */
+.welcome-center-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: welcomeCardEntrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes welcomeCardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.welcome-glass-card {
+  position: relative;
+  width: 100%;
+  background: rgba(25, 40, 58, 0.84);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(139, 188, 232, 0.28);
+  border-radius: 20px;
+  padding: 48px 44px;
+  text-align: center;
+  box-shadow:
+    0 24px 60px rgba(4, 8, 14, 0.85),
+    0 0 48px rgba(85, 199, 217, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Ambient glow inside card */
+.card-ambient-highlight {
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #55C7D9, #8BBCE8, transparent);
+  opacity: 0.8;
+}
+
+/* Top Badge: Information Science Engineering Student */
+.welcome-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  background: rgba(16, 27, 43, 0.88);
+  border: 1px solid rgba(85, 199, 217, 0.35);
+  border-radius: 30px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 0 12px rgba(85, 199, 217, 0.08);
+  margin-bottom: 24px;
+}
+
+.welcome-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #55C7D9;
+  box-shadow: 0 0 8px #55C7D9;
+  animation: badgeDotPulse 2s infinite ease-in-out;
+}
+
+@keyframes badgeDotPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.65;
+  }
+}
+
+.welcome-badge-text {
+  font-family: "Times New Roman", Times, Georgia, serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #AEBAC8;
+  letter-spacing: 0.5px;
+}
+
+/* Main Heading: Welcome to Sunil S */
+.welcome-heading {
+  font-family: "Times New Roman", Times, Georgia, serif;
+  font-size: clamp(2.4rem, 5.2vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.5px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.welcome-heading-prefix {
+  color: #F5F5F5;
+}
+
+.welcome-heading-name {
+  background: linear-gradient(135deg, #FFFFFF 0%, #8BBCE8 45%, #55C7D9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  margin-left: 8px;
+  filter: drop-shadow(0 2px 10px rgba(85, 199, 217, 0.25));
+}
+
+/* Subtitle / Description */
+.welcome-subtitle {
+  font-family: "Times New Roman", Times, Georgia, serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  color: #AEBAC8;
+  max-width: 580px;
+  line-height: 1.6;
+  margin: 0 0 28px 0;
+  text-align: center;
+}
+
+/* Meta Pills */
+.welcome-meta-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 34px;
+}
+
+.welcome-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: rgba(16, 27, 43, 0.7);
+  border: 1px solid rgba(139, 188, 232, 0.18);
+  font-family: "Times New Roman", Times, Georgia, serif;
+  font-size: 0.92rem;
+  color: #D2D9E2;
+}
+
+.pill-check {
+  color: #55C7D9;
+}
+
+/* Prominent Action Button: LOGIN / ENTER PORTFOLIO → */
+.welcome-action-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.welcome-enter-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #101B2B 0%, #19283A 50%, #22374E 100%);
+  border: 1px solid rgba(85, 199, 217, 0.55);
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(85, 199, 217, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  font-family: "Times New Roman", Times, Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.welcome-enter-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  border-color: #55C7D9;
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.7),
+    0 0 36px rgba(85, 199, 217, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  background: linear-gradient(135deg, #162438 0%, #20354E 50%, #2B4564 100%);
+}
+
+.welcome-enter-btn:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+.enter-btn-bg-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: left 0.6s ease;
+}
+
+.welcome-enter-btn:hover .enter-btn-bg-shimmer {
+  left: 100%;
+}
+
+.enter-btn-content {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.enter-btn-label {
+  color: #FFFFFF;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.enter-btn-arrow-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #55C7D9;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
+}
+
+.welcome-enter-btn:hover .enter-btn-arrow-wrap {
+  transform: translateX(5px);
+  color: #8BBCE8;
+}
+
+.enter-btn-arrow {
+  stroke-width: 2.2;
+}
+
+.welcome-btn-hint {
+  font-family: "Times New Roman", Times, Georgia, serif;
+  font-size: 0.85rem;
+  color: #7A90A8;
+  letter-spacing: 0.3px;
+}
+
+/* --------------------------------------------------------------------------
+   3. RESPONSIVE DESIGN (TABLET & MOBILE)
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  .welcome-glass-card {
+    padding: 38px 28px;
+    border-radius: 16px;
+  }
+
+  .dev-workstation-scenery {
+    opacity: 0.45;
+  }
+
+  .dev-editor-display {
+    height: 380px;
+  }
+}
+
+@media (max-width: 640px) {
+  .welcome-center-container {
+    padding: 16px;
+  }
+
+  .welcome-glass-card {
+    padding: 30px 18px;
+    border-radius: 14px;
+  }
+
+  .welcome-badge {
+    padding: 6px 14px;
+    margin-bottom: 18px;
+  }
+
+  .welcome-badge-text {
+    font-size: 0.85rem;
+  }
+
+  .welcome-heading {
+    font-size: 2.1rem;
+    margin-bottom: 12px;
+  }
+
+  .welcome-subtitle {
+    font-size: 1.02rem;
+    margin-bottom: 20px;
+  }
+
+  .welcome-meta-pills {
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .welcome-pill {
+    font-size: 0.82rem;
+    padding: 5px 10px;
+  }
+
+  .welcome-enter-btn {
+    width: 100%;
+    padding: 14px 22px;
+    font-size: 1.02rem;
+  }
+
+  .dev-workstation-scenery {
+    opacity: 0.32;
+    top: 52%;
+  }
+
+  .dev-editor-display {
+    height: 320px;
+  }
+
+  .dev-editor-tabs .dev-editor-tab:not(.active) {
+    display: none;
+  }
+
+  .floating-syntax {
+    font-size: 0.9rem !important;
+  }
+}
+
+/* Accessibility: respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .welcome-screen-root,
+  .welcome-center-container,
+  .welcome-enter-btn,
+  .welcome-enter-btn:hover,
+  .floating-syntax,
+  .welcome-badge-dot,
+  .terminal-cursor,
+  .coffee-steam {
+    animation: none !important;
+    transition: none !important;
+  }
+}

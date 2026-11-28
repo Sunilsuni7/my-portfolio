@@ -3451,6 +3451,7 @@ img {
 }
 
 .pro-footer-icon,
+.pro-welcome-replay-btn,
 .pro-back-to-top {
   display: inline-flex;
   align-items: center;
@@ -3463,9 +3464,11 @@ img {
   color: var(--text-muted);
   text-decoration: none;
   transition: all 0.22s ease;
+  cursor: pointer;
 }
 
 .pro-footer-icon:hover,
+.pro-welcome-replay-btn:hover,
 .pro-back-to-top:hover {
   color: var(--accent-hover);
   background: var(--bg-card-hover);

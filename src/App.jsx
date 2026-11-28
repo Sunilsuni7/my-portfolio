@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import WelcomeScreen from "./components/welcome/WelcomeScreen";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Contact from "./components/contact/Contact";
@@ -9,10 +10,11 @@ import Education from "./components/education/Education";
 import ScrollReveal from "./components/common/ScrollReveal";
 import WaveBackground from "./components/common/WaveBackground";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Monitor } from "lucide-react";
 import "./App.css";
 
 function App() {
+  const [showWelcome, setShowWelcome] = useState(true);
   const [activeSection, setActiveSection] = useState("about");
 
   useEffect(() => {
@@ -71,6 +73,11 @@ function App() {
 
   return (
     <div className="portfolio-root">
+      {/* DEVELOPER-THEMED WELCOME LANDING SCREEN (APPEARS FIRST) */}
+      {showWelcome && (
+        <WelcomeScreen onEnter={() => setShowWelcome(false)} />
+      )}
+
       {/* ANIMATED MULTI-COLOUR WAVE BACKGROUND */}
       <WaveBackground />
 
@@ -124,6 +131,18 @@ function App() {
               >
                 <FaLinkedin size={18} />
               </a>
+              <button
+                type="button"
+                className="pro-welcome-replay-btn"
+                onClick={() => {
+                  window.scrollTo({ top: 0 });
+                  setShowWelcome(true);
+                }}
+                title="Return to Developer Welcome Screen"
+                aria-label="Return to Developer Welcome Screen"
+              >
+                <Monitor size={16} />
+              </button>
               <a 
                 href="#about" 
                 className="pro-back-to-top" 
