@@ -1,26 +1,21 @@
 import React from 'react';
 
 /**
- * WaveBackground Component
+ * WaveBackground Component - BURGUNDY ROSE THEME
  * 
  * Elegant, smooth, continuously moving abstract multi-colour wave layers.
  * 
  * Palette:
- * - Ice Blue:        #8BBCE8
- * - Cyan:            #55C7D9
- * - Muted Teal:      #4DADA5
- * - Soft Violet:     #8584C7
- * - Metallic Silver: #AEBAC8
- * - Deep Blue:       #30485E
- * 
- * Features:
- * - Multiple layered SVG paths with natural gradient transitions
- * - Multi-axis continuous movement (horizontal flow + gentle vertical oscillation)
- * - Distinct animation durations per layer for parallax depth
- * - Subtle opacity and soft blur for a premium ambient appearance
- * - Concentrated behind hero, extending subtly throughout the page
- * - Text, buttons, and cards remain clearly readable
- * - Fully responsive and honors prefers-reduced-motion
+ * - Main background:     #17151B
+ * - Secondary bg:        #211A24
+ * - Section bg:          #28202B
+ * - Card bg:             #332735
+ * - Burgundy accent:     #694D68
+ * - Dusty Rose:          #D19BBE
+ * - Soft Pink:           #B987A8
+ * - Muted Silver:        #D8CED7
+ * - Primary text:        #F5F1F3
+ * - Secondary text:      #BDB4BD
  */
 export default function WaveBackground() {
   return (
@@ -33,56 +28,63 @@ export default function WaveBackground() {
       <div className="wave-ambient-glow glow-bottom" />
 
       {/* ------------------------------------------------------------------
-          2. HERO PROMINENT FLOWING MULTI-COLOUR WAVE SYSTEM
+          2. HERO PROMINENT FLOWING BURGUNDY ROSE WAVE SYSTEM
           ------------------------------------------------------------------ */}
       <div className="hero-waves-container">
         {/* SVG GRADIENT DEFINITIONS */}
         <svg className="wave-defs-svg" aria-hidden="true" focusable="false">
           <defs>
-            {/* Wave 1: Deep Blue -> Muted Teal -> Cyan -> Ice Blue */}
+            {/* Wave 1: Burgundy -> Soft Pink -> Dusty Rose -> Muted Silver */}
             <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#30485E" stopOpacity="0.45" />
-              <stop offset="32%" stopColor="#4DADA5" stopOpacity="0.40" />
-              <stop offset="68%" stopColor="#55C7D9" stopOpacity="0.36" />
-              <stop offset="100%" stopColor="#8BBCE8" stopOpacity="0.42" />
+              <stop offset="0%" stopColor="#694D68" stopOpacity="0.44" />
+              <stop offset="30%" stopColor="#B987A8" stopOpacity="0.38" />
+              <stop offset="65%" stopColor="#D19BBE" stopOpacity="0.36" />
+              <stop offset="100%" stopColor="#D8CED7" stopOpacity="0.38" />
             </linearGradient>
 
-            {/* Wave 2: Soft Violet -> Cyan -> Metallic Silver -> Deep Blue */}
+            {/* Wave 2: Dusty Rose -> Burgundy -> Muted Silver -> Section Dark */}
             <linearGradient id="waveGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#8584C7" stopOpacity="0.38" />
-              <stop offset="38%" stopColor="#55C7D9" stopOpacity="0.32" />
-              <stop offset="72%" stopColor="#AEBAC8" stopOpacity="0.28" />
-              <stop offset="100%" stopColor="#30485E" stopOpacity="0.36" />
+              <stop offset="0%" stopColor="#D19BBE" stopOpacity="0.38" />
+              <stop offset="35%" stopColor="#694D68" stopOpacity="0.40" />
+              <stop offset="70%" stopColor="#D8CED7" stopOpacity="0.30" />
+              <stop offset="100%" stopColor="#28202B" stopOpacity="0.45" />
             </linearGradient>
 
-            {/* Wave 3: Muted Teal -> Ice Blue -> Soft Violet -> Metallic Silver */}
+            {/* Wave 3: Soft Pink -> Muted Silver -> Burgundy -> Dusty Rose */}
             <linearGradient id="waveGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#4DADA5" stopOpacity="0.32" />
-              <stop offset="42%" stopColor="#8BBCE8" stopOpacity="0.34" />
-              <stop offset="75%" stopColor="#8584C7" stopOpacity="0.30" />
-              <stop offset="100%" stopColor="#AEBAC8" stopOpacity="0.26" />
+              <stop offset="0%" stopColor="#B987A8" stopOpacity="0.34" />
+              <stop offset="38%" stopColor="#D8CED7" stopOpacity="0.32" />
+              <stop offset="72%" stopColor="#694D68" stopOpacity="0.36" />
+              <stop offset="100%" stopColor="#D19BBE" stopOpacity="0.30" />
             </linearGradient>
 
-            {/* Wave 4: Deep Blue -> Soft Violet -> Cyan -> Ice Blue */}
+            {/* Wave 4: Base Burgundy -> Burgundy Accent -> Soft Pink -> Dusty Rose */}
             <linearGradient id="waveGrad4" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#30485E" stopOpacity="0.40" />
-              <stop offset="35%" stopColor="#8584C7" stopOpacity="0.28" />
-              <stop offset="68%" stopColor="#55C7D9" stopOpacity="0.26" />
-              <stop offset="100%" stopColor="#8BBCE8" stopOpacity="0.32" />
+              <stop offset="0%" stopColor="#28202B" stopOpacity="0.48" />
+              <stop offset="32%" stopColor="#694D68" stopOpacity="0.38" />
+              <stop offset="66%" stopColor="#B987A8" stopOpacity="0.30" />
+              <stop offset="100%" stopColor="#D19BBE" stopOpacity="0.34" />
             </linearGradient>
 
-            {/* Subtle Middle Section Gradient */}
+            {/* Subtle Middle Section Gradient (Skills & Projects area) */}
             <linearGradient id="waveGradMid" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#30485E" stopOpacity="0.18" />
-              <stop offset="50%" stopColor="#4DADA5" stopOpacity="0.14" />
-              <stop offset="100%" stopColor="#8584C7" stopOpacity="0.16" />
+              <stop offset="0%" stopColor="#694D68" stopOpacity="0.24" />
+              <stop offset="50%" stopColor="#B987A8" stopOpacity="0.18" />
+              <stop offset="100%" stopColor="#D19BBE" stopOpacity="0.20" />
             </linearGradient>
 
-            {/* Subtle Lower Section Gradient */}
+            {/* Subtle Lower Section Gradient (Experience & Education area) */}
             <linearGradient id="waveGradLower" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#8584C7" stopOpacity="0.15" />
-              <stop offset="50%" stopColor="#55C7D9" stopOpacity="0.12" />
-              <stop offset="100%" stopColor="#30485E" stopOpacity="0.16" />
+              <stop offset="0%" stopColor="#D19BBE" stopOpacity="0.20" />
+              <stop offset="50%" stopColor="#694D68" stopOpacity="0.22" />
+              <stop offset="100%" stopColor="#D8CED7" stopOpacity="0.16" />
+            </linearGradient>
+
+            {/* Subtle Contact & Footer Section Gradient */}
+            <linearGradient id="waveGradContact" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#694D68" stopOpacity="0.22" />
+              <stop offset="45%" stopColor="#D19BBE" stopOpacity="0.18" />
+              <stop offset="100%" stopColor="#B987A8" stopOpacity="0.19" />
             </linearGradient>
           </defs>
         </svg>
@@ -167,7 +169,7 @@ export default function WaveBackground() {
           </svg>
         </div>
 
-        {/* Lower-page subtle wave band (Experience, Education & Contact area) */}
+        {/* Lower-page subtle wave band (Experience & Education area) */}
         <div className="subtle-wave-track track-lower">
           <svg
             className="subtle-wave-svg"
@@ -181,14 +183,29 @@ export default function WaveBackground() {
             />
           </svg>
         </div>
+
+        {/* Contact & Footer subtle wave band */}
+        <div className="subtle-wave-track track-contact">
+          <svg
+            className="subtle-wave-svg"
+            viewBox="0 0 2880 390"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              fill="url(#waveGradContact)"
+              d="M0,190 C340,270 680,120 1020,210 C1240,250 1380,150 1440,190 C1780,270 2120,120 2460,210 C2680,250 2820,150 2880,190 L2880,390 L0,390 Z"
+            />
+          </svg>
+        </div>
       </div>
 
       {/* ------------------------------------------------------------------
-          4. SUBTLE RADIAL HIGHLIGHT ACCENTS (Muted Teal & Soft Violet)
+          4. SUBTLE RADIAL HIGHLIGHT ACCENTS (Burgundy, Dusty Rose & Soft Pink)
           ------------------------------------------------------------------ */}
-      <div className="wave-accent-orb orb-teal" />
-      <div className="wave-accent-orb orb-violet" />
-      <div className="wave-accent-orb orb-cyan" />
+      <div className="wave-accent-orb orb-burgundy" />
+      <div className="wave-accent-orb orb-dusty-rose" />
+      <div className="wave-accent-orb orb-soft-pink" />
     </div>
   );
 }

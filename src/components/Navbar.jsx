@@ -17,12 +17,12 @@ export default function Navbar({ activeSection = 'home' }) {
 
   const navLinks = [
     { label: 'About', href: '#about', id: 'about' },
-    { label: 'Contact', href: '#contact', id: 'contact' },
     { label: 'Skills', href: '#skills', id: 'skills' },
     { label: 'Projects', href: '#projects', id: 'projects' },
     { label: 'Experience', href: '#experience', id: 'experience' },
     { label: 'Education', href: '#education', id: 'education' },
     { label: 'Certifications', href: '#certifications', id: 'certifications' },
+    { label: 'Contact', href: '#contact', id: 'contact' },
   ];
 
   return (

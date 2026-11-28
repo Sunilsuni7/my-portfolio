@@ -25,31 +25,37 @@
    DESIGN TOKENS & ROOT VARIABLES
    -------------------------------------------------------------------------- */
 :root {
-  /* Deep Navy & Charcoal Wave Background Color System */
-  --bg-primary: #080E18;
-  --bg-secondary: #101B2B;
-  --bg-card: #19283A;
-  --bg-card-hover: #21354c;
-  --bg-inner: #132235;
-  --bg-inner-hover: #1b2e47;
+  /* Burgundy Rose Background Color System */
+  --bg-primary: #17151B;        /* Main background */
+  --bg-secondary: #211A24;      /* Secondary background */
+  --bg-section: #28202B;        /* Section background */
+  --bg-card: #332735;           /* Card background */
+  --bg-card-hover: #3E3041;     /* Card background on hover */
+  --bg-inner: #241C27;          /* Inner container surface */
+  --bg-inner-hover: #2D2230;    /* Inner surface hover */
+
+  /* Burgundy Rose Theme Accents */
+  --burgundy-accent: #694D68;
+  --dusty-rose: #D19BBE;
+  --soft-pink: #B987A8;
+  --muted-silver: #D8CED7;
 
   /* Animated Wave Palette */
-  --wave-ice-blue: #8BBCE8;
-  --wave-cyan: #55C7D9;
-  --wave-muted-teal: #4DADA5;
-  --wave-soft-violet: #8584C7;
-  --wave-metallic-silver: #AEBAC8;
-  --wave-deep-blue: #30485E;
+  --wave-burgundy: #694D68;
+  --wave-dusty-rose: #D19BBE;
+  --wave-soft-pink: #B987A8;
+  --wave-silver: #D8CED7;
+  --wave-dark-rose: #28202B;
 
   /* Text System */
-  --text-heading: #F5F5F5;
-  --text-primary: #F5F5F5;
-  --text-body: #A5A5A5;
-  --text-secondary: #A5A5A5;
-  --text-muted: #A5A5A5;
-  --text-dim: #737373;
+  --text-heading: #F5F1F3;      /* Primary text */
+  --text-primary: #F5F1F3;      /* Primary text */
+  --text-body: #BDB4BD;         /* Secondary text */
+  --text-secondary: #BDB4BD;    /* Secondary text */
+  --text-muted: #BDB4BD;        /* Muted secondary text */
+  --text-dim: #8E828D;          /* Dim secondary text */
 
-  /* Champagne Accent System */
+  /* Preserved Gold/Champagne Button Accent System */
   --accent: #D6B77A;
   --accent-primary: #D6B77A;
   --accent-hover: #E4C88E;
@@ -57,10 +63,10 @@
   --accent-subtle: rgba(214, 183, 122, 0.12);
   --accent-glow: rgba(214, 183, 122, 0.18);
 
-  /* Thin Understated Borders & Dividers */
-  --border-subtle: rgba(139, 188, 232, 0.11);
-  --border-card: rgba(139, 188, 232, 0.09);
-  --border-hover: rgba(214, 183, 122, 0.35);
+  /* Thin Understated Borders & Dividers in Dusty Rose Tint */
+  --border-subtle: rgba(209, 155, 190, 0.15);
+  --border-card: rgba(209, 155, 190, 0.12);
+  --border-hover: rgba(214, 183, 122, 0.45);
   --border-accent: #D6B77A;
 
   /* Universal Serif Typography (Times New Roman) */
@@ -201,7 +207,7 @@ img {
   right: -8%;
   width: 75vw;
   height: 65vh;
-  background: radial-gradient(circle, rgba(48, 72, 94, 0.22) 0%, rgba(85, 199, 217, 0.08) 45%, transparent 75%);
+  background: radial-gradient(circle, rgba(105, 77, 104, 0.28) 0%, rgba(209, 155, 190, 0.10) 45%, transparent 75%);
   filter: blur(65px);
 }
 
@@ -210,7 +216,7 @@ img {
   left: -15%;
   width: 70vw;
   height: 60vh;
-  background: radial-gradient(circle, rgba(77, 173, 165, 0.12) 0%, rgba(48, 72, 94, 0.05) 50%, transparent 75%);
+  background: radial-gradient(circle, rgba(185, 135, 168, 0.15) 0%, rgba(105, 77, 104, 0.08) 50%, transparent 75%);
   filter: blur(75px);
 }
 
@@ -219,7 +225,7 @@ img {
   right: -5%;
   width: 75vw;
   height: 65vh;
-  background: radial-gradient(circle, rgba(133, 132, 199, 0.14) 0%, rgba(85, 199, 217, 0.05) 50%, transparent 75%);
+  background: radial-gradient(circle, rgba(209, 155, 190, 0.18) 0%, rgba(105, 77, 104, 0.10) 50%, transparent 75%);
   filter: blur(70px);
 }
 
@@ -360,7 +366,7 @@ img {
 }
 
 .subtle-wave-track.track-mid {
-  top: 36%;
+  top: 34%;
   height: 380px;
   filter: blur(45px);
   opacity: 0.65;
@@ -368,11 +374,19 @@ img {
 }
 
 .subtle-wave-track.track-lower {
-  top: 68%;
+  top: 62%;
   height: 380px;
   filter: blur(52px);
   opacity: 0.60;
   animation: subtleWaveLower 80s ease-in-out infinite alternate;
+}
+
+.subtle-wave-track.track-contact {
+  top: 84%;
+  height: 380px;
+  filter: blur(48px);
+  opacity: 0.58;
+  animation: subtleWaveContact 72s ease-in-out infinite alternate;
 }
 
 @keyframes subtleWaveMid {
@@ -399,7 +413,19 @@ img {
   }
 }
 
-/* 4. Subtle Radial Color Accents */
+@keyframes subtleWaveContact {
+  0% {
+    transform: translate3d(-5%, -10px, 0);
+  }
+  50% {
+    transform: translate3d(-26%, 12px, 0);
+  }
+  100% {
+    transform: translate3d(-45%, -6px, 0);
+  }
+}
+
+/* 4. Subtle Radial Color Accents (Burgundy Rose Theme) */
 .wave-accent-orb {
   position: absolute;
   border-radius: 50%;
@@ -407,32 +433,35 @@ img {
   mix-blend-mode: screen;
 }
 
+.wave-accent-orb.orb-burgundy,
 .wave-accent-orb.orb-teal {
   top: 24%;
   left: 12%;
   width: 440px;
   height: 440px;
-  background: radial-gradient(circle, rgba(77, 173, 165, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(105, 77, 104, 0.14) 0%, transparent 70%);
   filter: blur(55px);
   animation: floatOrb1 32s ease-in-out infinite alternate;
 }
 
+.wave-accent-orb.orb-dusty-rose,
 .wave-accent-orb.orb-violet {
   top: 56%;
   right: 10%;
   width: 480px;
   height: 480px;
-  background: radial-gradient(circle, rgba(133, 132, 199, 0.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(209, 155, 190, 0.12) 0%, transparent 70%);
   filter: blur(60px);
   animation: floatOrb2 40s ease-in-out infinite alternate;
 }
 
+.wave-accent-orb.orb-soft-pink,
 .wave-accent-orb.orb-cyan {
   top: 80%;
   left: 18%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(85, 199, 217, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(185, 135, 168, 0.11) 0%, transparent 70%);
   filter: blur(50px);
   animation: floatOrb3 48s ease-in-out infinite alternate;
 }
@@ -643,22 +672,22 @@ img {
   right: 0;
   z-index: 1000;
   padding: 16px 36px;
-  background: rgba(8, 9, 11, 0.82);
+  background: rgba(23, 21, 27, 0.85);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--border-subtle);
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   animation: proHeaderFade 0.4s ease forwards;
 }
 
 .pro-header-wrapper.is-scrolled,
 .ref-navbar-wrapper.scrolled {
-  background: rgba(8, 9, 11, 0.95);
+  background: rgba(23, 21, 27, 0.96);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
-  border-bottom: 1px solid rgba(214, 183, 122, 0.22);
+  border-bottom: 1px solid rgba(209, 155, 190, 0.22);
   padding: 12px 36px;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(214, 183, 122, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(209, 155, 190, 0.08);
 }
 
 /* CONTAINER */
@@ -954,11 +983,11 @@ img {
 .ref-mobile-drawer {
   width: 100%;
   max-width: 480px;
-  background: rgba(17, 17, 17, 0.98);
-  border: 1px solid rgba(214, 183, 122, 0.3);
+  background: rgba(33, 26, 36, 0.98);
+  border: 1px solid rgba(209, 155, 190, 0.28);
   border-radius: 16px;
   padding: 22px;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.9), 0 0 24px rgba(214, 183, 122, 0.1);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.9), 0 0 24px rgba(209, 155, 190, 0.12);
   animation: proDrawerSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   display: flex;
   flex-direction: column;
@@ -1601,7 +1630,7 @@ img {
    ABOUT SECTION (#08090B & #17181B)
    -------------------------------------------------------------------------- */
 .min-about-section {
-  background-color: var(--bg-secondary);
+  background: linear-gradient(180deg, transparent 0%, rgba(33, 26, 36, 0.6) 15%, rgba(40, 32, 43, 0.72) 50%, rgba(33, 26, 36, 0.6) 85%, transparent 100%);
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
   padding: 100px 0;
@@ -1751,7 +1780,7 @@ img {
    TECHNICAL SKILLS SECTION
    -------------------------------------------------------------------------- */
 .min-skills-section {
-  background-color: transparent;
+  background: linear-gradient(180deg, transparent 0%, rgba(33, 26, 36, 0.6) 20%, rgba(33, 26, 36, 0.6) 80%, transparent 100%);
   padding: 100px 0;
   border-top: 1px solid var(--border-subtle);
   position: relative;
@@ -1953,7 +1982,7 @@ img {
    EXPERIENCE SECTION
    -------------------------------------------------------------------------- */
 .min-experience-section {
-  background-color: var(--bg-secondary);
+  background: linear-gradient(180deg, transparent 0%, rgba(33, 26, 36, 0.6) 20%, rgba(33, 26, 36, 0.6) 80%, transparent 100%);
   padding: 100px 0;
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
@@ -2206,7 +2235,7 @@ img {
    PROJECTS SECTION
    -------------------------------------------------------------------------- */
 .min-projects-section {
-  background-color: transparent;
+  background: linear-gradient(180deg, transparent 0%, rgba(40, 32, 43, 0.68) 20%, rgba(40, 32, 43, 0.68) 80%, transparent 100%);
   padding: 100px 0;
   border-top: 1px solid var(--border-subtle);
   position: relative;
@@ -2470,7 +2499,7 @@ img {
    EDUCATION & CERTIFICATIONS SECTION
    -------------------------------------------------------------------------- */
 .min-education-section {
-  background-color: transparent;
+  background: linear-gradient(180deg, transparent 0%, rgba(40, 32, 43, 0.68) 20%, rgba(40, 32, 43, 0.7) 80%, transparent 100%);
   padding: 100px 0;
   border-top: 1px solid var(--border-subtle);
   position: relative;
@@ -3250,7 +3279,7 @@ img {
    CONTACT SECTION
    -------------------------------------------------------------------------- */
 .min-contact-section {
-  background-color: transparent;
+  background: linear-gradient(180deg, transparent 0%, rgba(33, 26, 36, 0.72) 20%, rgba(33, 26, 36, 0.72) 80%, transparent 100%);
   padding: 100px 0;
   border-top: 1px solid var(--border-subtle);
   position: relative;
@@ -3485,7 +3514,7 @@ img {
    -------------------------------------------------------------------------- */
 .pro-footer {
   padding: 34px 0;
-  background-color: #070707;
+  background-color: #141217;
   border-top: 1px solid var(--border-subtle);
 }
 

@@ -25,10 +25,10 @@ function App() {
         return;
       }
 
-      // 2. If near page bottom, activate Certifications (last section)
+      // 2. If near page bottom, activate Contact (last section before footer)
       const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 80;
       if (isAtBottom) {
-        setActiveSection("certifications");
+        setActiveSection("contact");
         return;
       }
 
@@ -43,14 +43,14 @@ function App() {
       }
 
       // 4. Check primary navigation targets in order of page placement (bottom to top for accurate detection)
-      // Exact top-to-bottom sequence: about -> contact -> skills -> projects -> experience -> education -> certifications
+      // Exact top-to-bottom sequence: about -> skills -> projects -> experience -> education -> certifications -> contact
       const sectionTargets = [
+        { id: "contact", navId: "contact" },
         { id: "certifications", navId: "certifications" },
         { id: "education", navId: "education" },
         { id: "experience", navId: "experience" },
         { id: "projects", navId: "projects" },
         { id: "skills", navId: "skills" },
-        { id: "contact", navId: "contact" },
         { id: "about", navId: "about" },
       ];
 
@@ -89,20 +89,20 @@ function App() {
           {/* 1. ABOUT SECTION (FIRST SECTION IMMEDIATELY BELOW NAVBAR) */}
           <About />
 
-          {/* 2. CONTACT SECTION */}
-          <Contact />
-
-          {/* 3. SKILLS / TECHNOLOGY STACK SECTION */}
+          {/* 2. SKILLS / TECHNOLOGY STACK SECTION */}
           <TechnologyStack />
 
-          {/* 4. PROJECTS SECTION */}
+          {/* 3. PROJECTS SECTION */}
           <Projects />
 
-          {/* 5. EXPERIENCE SECTION */}
+          {/* 4. EXPERIENCE SECTION */}
           <Experience />
 
-          {/* 6. EDUCATION & CERTIFICATIONS SECTION */}
+          {/* 5. EDUCATION & CERTIFICATIONS SECTION */}
           <Education />
+
+          {/* 6. CONTACT SECTION (LAST PORTFOLIO SECTION BEFORE FOOTER) */}
+          <Contact />
         </main>
 
         {/* MINIMAL PROFESSIONAL FOOTER WITH SMOOTH ENTRANCE */}
