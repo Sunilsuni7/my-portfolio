@@ -1,36 +1,9 @@
 import { useState, useEffect } from 'react';
-import { ArrowRight, Terminal, Code2, Monitor, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Code2, Sparkles, Terminal } from 'lucide-react';
 import './WelcomeScreen.css';
 
 export default function WelcomeScreen({ onEnter }) {
   const [isExiting, setIsExiting] = useState(false);
-  const [typedLineIndex, setTypedLineIndex] = useState(0);
-
-  const codeSnippets = [
-    { num: '01', text: '// Sunil S — Developer Workstation', type: 'comment' },
-    { num: '02', text: 'import { EngineeringStudent, Developer } from "@sunil/core";', type: 'import' },
-    { num: '03', text: '', type: 'empty' },
-    { num: '04', text: 'const profile: Developer = {', type: 'decl' },
-    { num: '05', text: '  name: "Sunil S",', type: 'prop' },
-    { num: '06', text: '  discipline: "Information Science Engineering",', type: 'prop' },
-    { num: '07', text: '  institution: "Garden City University (2023–2027)",', type: 'prop' },
-    { num: '08', text: '  focus: ["Python", "React", "SQL", "Web Technologies", "AI"],', type: 'prop' },
-    { num: '09', text: '  status: "Ready to Innovate & Collaborate"', type: 'prop' },
-    { num: '10', text: '};', type: 'decl' },
-    { num: '11', text: '', type: 'empty' },
-    { num: '12', text: 'export async function initializePortfolio() {', type: 'func' },
-    { num: '13', text: '  await profile.loadProjects({ featured: true });', type: 'body' },
-    { num: '14', text: '  return profile.launchDashboard();', type: 'body' },
-    { num: '15', text: '}', type: 'func' },
-  ];
-
-  // Subtle code reveal ticker
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTypedLineIndex((prev) => (prev < codeSnippets.length ? prev + 1 : prev));
-    }, 140);
-    return () => clearInterval(interval);
-  }, [codeSnippets.length]);
 
   const handleEnterClick = () => {
     if (isExiting) return;
@@ -52,180 +25,161 @@ export default function WelcomeScreen({ onEnter }) {
   }, [isExiting]);
 
   return (
-    <div className={`welcome-screen-root ${isExiting ? 'welcome-screen-exit' : ''}`} role="dialog" aria-modal="true" aria-label="Welcome to Sunil S Portfolio">
+    <div
+      className={`rose-welcome-root ${isExiting ? 'rose-welcome-exit' : ''}`}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Welcome to Sunil S Portfolio"
+    >
       {/* -------------------------------------------------------------
-          1. REALISTIC DEVELOPER WORKSPACE BACKGROUND
+          1. SOFT FLOWING LIGHT WAVES BACKGROUND
           ------------------------------------------------------------- */}
-      <div className="dev-workspace-backdrop" aria-hidden="true">
-        {/* Soft radial ambient bias lighting */}
-        <div className="dev-ambient-glow glow-cyan" />
-        <div className="dev-ambient-glow glow-ice-blue" />
-        <div className="dev-ambient-glow glow-violet" />
-        <div className="dev-grid-pattern" />
+      <div className="rose-waves-container" aria-hidden="true">
+        {/* Ambient radial lighting in Rose Copper & Soft Rose */}
+        <div className="rose-ambient-glow glow-top-left" />
+        <div className="rose-ambient-glow glow-top-right" />
+        <div className="rose-ambient-glow glow-bottom-center" />
+        <div className="rose-ambient-glow glow-bottom-right" />
 
-        {/* Ambient Floating Syntax Particles */}
-        <div className="dev-floating-syntax-layer">
-          <span className="floating-syntax token-1">&lt;/&gt;</span>
-          <span className="floating-syntax token-2">&#123; &#125;</span>
-          <span className="floating-syntax token-3">def async</span>
-          <span className="floating-syntax token-4">=&gt;</span>
-          <span className="floating-syntax token-5">const</span>
-          <span className="floating-syntax token-6">import</span>
-          <span className="floating-syntax token-7">[ * ]</span>
-          <span className="floating-syntax token-8">git:main</span>
-          <span className="floating-syntax token-9">fn()</span>
-          <span className="floating-syntax token-10">01</span>
-          <span className="floating-syntax token-11">await</span>
-          <span className="floating-syntax token-12">&amp;&amp;</span>
+        {/* Soft Flowing Light Waves (SVG Ribbons around edges & corners) */}
+        <div className="rose-wave-mesh-wrapper">
+          {/* Wave Layer 1 — Deep Bronze / Charcoal Soft Wave */}
+          <svg className="rose-wave-svg wave-layer-1" viewBox="0 0 1440 600" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="roseWaveGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#E18C78" stopOpacity="0.18" />
+                <stop offset="35%" stopColor="#C98F83" stopOpacity="0.25" />
+                <stop offset="70%" stopColor="#60463F" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#D9A99E" stopOpacity="0.15" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0,160 C320,300 420,-40 720,120 C1020,280 1120,40 1440,200 L1440,600 L0,600 Z"
+              fill="url(#roseWaveGrad1)"
+            />
+          </svg>
+
+          {/* Wave Layer 2 — Primary Rose Copper & Muted Pink */}
+          <svg className="rose-wave-svg wave-layer-2" viewBox="0 0 1440 600" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="roseWaveGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#D9A99E" stopOpacity="0.22" />
+                <stop offset="40%" stopColor="#E18C78" stopOpacity="0.32" />
+                <stop offset="75%" stopColor="#C98F83" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="#E8D8D3" stopOpacity="0.18" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0,240 C280,100 540,360 840,220 C1140,80 1280,320 1440,180 L1440,600 L0,600 Z"
+              fill="url(#roseWaveGrad2)"
+            />
+          </svg>
+
+          {/* Wave Layer 3 — Warm Silver & Soft Rose Flow */}
+          <svg className="rose-wave-svg wave-layer-3" viewBox="0 0 1440 600" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="roseWaveGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#E8D8D3" stopOpacity="0.12" />
+                <stop offset="50%" stopColor="#E18C78" stopOpacity="0.26" />
+                <stop offset="85%" stopColor="#D9A99E" stopOpacity="0.28" />
+                <stop offset="100%" stopColor="#60463F" stopOpacity="0.15" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0,320 C360,180 620,420 920,260 C1220,100 1340,300 1440,240 L1440,600 L0,600 Z"
+              fill="url(#roseWaveGrad3)"
+            />
+          </svg>
+
+          {/* Top Edge Flowing Wave Layer */}
+          <svg className="rose-wave-svg wave-layer-top" viewBox="0 0 1440 400" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="roseWaveGradTop" x1="100%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stopColor="#E18C78" stopOpacity="0.2" />
+                <stop offset="50%" stopColor="#C98F83" stopOpacity="0.15" />
+                <stop offset="100%" stopColor="#60463F" stopOpacity="0.05" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0,0 L1440,0 L1440,120 C1180,240 960,60 680,180 C400,300 220,90 0,160 Z"
+              fill="url(#roseWaveGradTop)"
+            />
+          </svg>
         </div>
 
-        {/* Developer Desk & Programming Monitor Setup */}
-        <div className="dev-workstation-scenery">
-          {/* Ambient LED bias lighting behind monitor */}
-          <div className="monitor-bias-lighting" />
-
-          {/* Computer Monitor */}
-          <div className="dev-monitor-chassis">
-            {/* Monitor Top Bezel / Camera */}
-            <div className="dev-monitor-bezel-top">
-              <span className="monitor-webcam-dot" />
-            </div>
-
-            {/* Dark Code Editor Screen */}
-            <div className="dev-editor-display">
-              {/* Window Header */}
-              <div className="dev-editor-header">
-                <div className="dev-window-controls">
-                  <span className="window-dot dot-close" />
-                  <span className="window-dot dot-minimize" />
-                  <span className="window-dot dot-maximize" />
-                </div>
-                <div className="dev-editor-tabs">
-                  <div className="dev-editor-tab active">
-                    <Code2 size={13} className="tab-icon" />
-                    <span>developer_profile.ts</span>
-                  </div>
-                  <div className="dev-editor-tab">
-                    <span>portfolio.py</span>
-                  </div>
-                  <div className="dev-editor-tab">
-                    <span>App.jsx</span>
-                  </div>
-                </div>
-                <div className="dev-editor-breadcrumb">
-                  <span>sunil-portfolio &gt; src &gt; workstation</span>
-                </div>
-              </div>
-
-              {/* Editor Workspace: Code lines & Syntax */}
-              <div className="dev-code-surface">
-                {codeSnippets.map((line, idx) => (
-                  <div
-                    key={line.num}
-                    className={`dev-code-line line-${line.type} ${idx <= typedLineIndex ? 'line-revealed' : ''}`}
-                  >
-                    <span className="line-num">{line.num}</span>
-                    <span className="line-content">{line.text}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Embedded Editor Terminal */}
-              <div className="dev-editor-terminal">
-                <div className="terminal-header">
-                  <Terminal size={12} className="terminal-icon" />
-                  <span>TERMINAL — zsh (sunil-dev)</span>
-                  <span className="terminal-status">● PORT 5173 ACTIVE</span>
-                </div>
-                <div className="terminal-body">
-                  <span className="terminal-prompt">sunil@workstation:~/my-portfolio$</span>
-                  <span className="terminal-cmd">npm run dev --ready</span>
-                  <span className="terminal-cursor" />
-                </div>
-              </div>
-            </div>
-
-            {/* Monitor Stand */}
-            <div className="dev-monitor-neck" />
-            <div className="dev-monitor-base" />
-          </div>
-
-          {/* Desk Surface & Silhouette Accessories */}
-          <div className="dev-desk-surface">
-            <div className="desk-mat">
-              {/* Subtle Keyboard Silhouette */}
-              <div className="keyboard-chassis">
-                <div className="keyboard-glow-underlay" />
-                <div className="keyboard-keys-hint" />
-              </div>
-            </div>
-            {/* Minimalist Coffee Mug */}
-            <div className="dev-desk-accessory coffee-mug">
-              <div className="coffee-steam" />
-            </div>
-          </div>
+        {/* Subtle Floating Code Symbols in Rose Copper & Silver */}
+        <div className="rose-syntax-layer">
+          <span className="rose-token token-1">&lt;/&gt;</span>
+          <span className="rose-token token-2">&#123; &#125;</span>
+          <span className="rose-token token-3">def async</span>
+          <span className="rose-token token-4">=&gt;</span>
+          <span className="rose-token token-5">const</span>
+          <span className="rose-token token-6">import</span>
+          <span className="rose-token token-7">[ * ]</span>
+          <span className="rose-token token-8">git:main</span>
+          <span className="rose-token token-9">fn()</span>
+          <span className="rose-token token-10">01</span>
         </div>
+
+        {/* Soft Vignette Mask — keeps central welcome text area clear and readable */}
+        <div className="rose-center-clear-mask" />
       </div>
 
       {/* -------------------------------------------------------------
-          2. CENTRAL PROMINENT WELCOME CARD
+          2. CENTRAL ELEGANT ROSE COPPER WELCOME CARD
           ------------------------------------------------------------- */}
-      <div className="welcome-center-container">
-        <div className="welcome-glass-card">
-          {/* Subtle Ambient Card Glow */}
-          <div className="card-ambient-highlight" />
+      <div className="rose-center-container">
+        <div className="rose-glass-card">
+          {/* Subtle Rose Copper Top Rim Highlight */}
+          <div className="rose-card-top-glow" />
 
-          {/* Top Badge: Information Science Engineering Student */}
-          <div className="welcome-badge">
-            <span className="welcome-badge-dot" />
-            <span className="welcome-badge-text">Information Science Engineering Student</span>
+          {/* Rose Copper Code Icon & Subtitle Pill */}
+          <div className="rose-badge-wrap">
+            <div className="rose-code-icon-badge" title="Developer Code Interface">
+              <Code2 size={16} className="rose-code-icon" />
+            </div>
+            <div className="rose-subtitle-pill">
+              <span className="rose-status-dot" />
+              <span className="rose-subtitle-text">Information Science Engineering Student</span>
+            </div>
           </div>
 
           {/* Main Heading: Welcome to Sunil S */}
-          <h1 className="welcome-heading">
-            <span className="welcome-heading-prefix">Welcome to </span>
-            <span className="welcome-heading-name">Sunil S</span>
+          <h1 className="rose-welcome-heading">
+            <span className="rose-heading-prefix">Welcome to </span>
+            <span className="rose-heading-name">Sunil S</span>
           </h1>
 
-          {/* Subtitle / Description */}
-          <p className="welcome-subtitle">
-            Explore my technical skills, projects and professional journey.
+          {/* Description Text */}
+          <p className="rose-welcome-description">
+            Explore my portfolio, skills, projects and experience.
           </p>
 
-          {/* Developer Highlights Ticker */}
-          <div className="welcome-meta-pills">
-            <span className="welcome-pill">
-              <CheckCircle2 size={13} className="pill-check" />
-              Python &amp; Full Stack
-            </span>
-            <span className="welcome-pill">
-              <CheckCircle2 size={13} className="pill-check" />
-              Web Technologies
-            </span>
-            <span className="welcome-pill">
-              <CheckCircle2 size={13} className="pill-check" />
-              AI &amp; Data Engineering
-            </span>
+          {/* Elegant Rose Copper Subtle Decorative Accent */}
+          <div className="rose-divider-accent">
+            <span className="rose-divider-line line-left" />
+            <Sparkles size={14} className="rose-sparkle-icon" />
+            <span className="rose-divider-line line-right" />
           </div>
 
-          {/* Prominent Action Button: LOGIN / ENTER PORTFOLIO → */}
-          <div className="welcome-action-wrap">
+          {/* Main Button: LOGIN / ENTER PORTFOLIO → */}
+          <div className="rose-action-wrap">
             <button
               type="button"
-              className="welcome-enter-btn"
+              className="rose-enter-btn"
               onClick={handleEnterClick}
               aria-label="Enter Portfolio"
               autoFocus
             >
-              <span className="enter-btn-bg-shimmer" />
-              <span className="enter-btn-content">
-                <span className="enter-btn-label">LOGIN / ENTER PORTFOLIO</span>
-                <span className="enter-btn-arrow-wrap">
-                  <ArrowRight size={18} className="enter-btn-arrow" />
+              <span className="rose-btn-shimmer" />
+              <span className="rose-btn-content">
+                <span className="rose-btn-label">LOGIN / ENTER PORTFOLIO</span>
+                <span className="rose-btn-arrow-wrap">
+                  <ArrowRight size={18} className="rose-btn-arrow" />
                 </span>
               </span>
             </button>
-            <span className="welcome-btn-hint">Press Enter or click to enter</span>
+            <span className="rose-btn-hint">Press Enter or click to enter portfolio</span>
           </div>
         </div>
       </div>
